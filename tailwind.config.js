@@ -2,7 +2,12 @@
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Mulish', 'Gilroy', 'system-ui', 'sans-serif'],
+        mono: ['FiraCode', 'Menlo', 'monospace'],
+      },
+    },
   },
   plugins: [],
 };
