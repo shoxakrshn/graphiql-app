@@ -1,0 +1,51 @@
+:root {
+  // colors
+  --color-primary: #005b7f;
+  --color-accent: #d81b60;
+}
+
+$font-sans: 'Mulish', 'Arial', sans-serif;
+$font-mono: 'FiraCode', 'Arial', sans-serif;
+
+$font-weight-thin: 100;
+$font-weight-ultralite: 200;
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-heavy: 800;
+$font-weight-black: 900;
+
+$font-size-xs: 12px;
+$font-size-sm: 14px;
+$font-size-base: 16px;
+$font-size-lg: 18px;
+$font-size-xl: 20px;
+$font-size-2xl: 24px;
+$font-size-3xl: 30px;
+$font-size-4xl: 36px;
+$font-size-5xl: 48px;
+$font-size-6xl: 60px;
+$font-size-7xl: 72px;
+$font-size-8xl: 96px;
+$font-size-9xl: 128px;
+
+$font-height-small: 100%;
+$font-height-base: 120%;
+$font-height-medium: 140%;
+$font-height-large: 160%;
+
+$b-radius: 5px;
+
+$break-xs: 430px;
+$break-sm: 768px;
+$break-md: 1024px;
+$break-lg: 1280px;
+$break-xl: 1600px;
+
+$fast-transition: all 0.15s ease-in-out;
+$slow-transition: all 0.4s ease-in-out;
+
+/// @type Length
+$max-width: 1440px !default;

@@ -1,0 +1,9 @@
+@use './variables' as *;
+@use './mediaquerys' as *;
+
+@mixin font-style($family: $font-serif, $size: $font-size-base, $color: $c-white, $weight: 400) {
+  font-family: $family;
+  font-size: $size;
+  font-weight: $weight;
+  color: $color;
+}
