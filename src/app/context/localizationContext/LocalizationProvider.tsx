@@ -2,13 +2,13 @@ import React, { ReactNode, useState } from 'react';
 import { LocalizationContext } from './LocalizationContext';
 import { LocalizationDataType } from './types';
 
-interface LocalizationContextProviderProps {
+interface LocalizationProviderProps {
   children: ReactNode;
 }
 
 const defaultLanguageData = (await import(`../../localization/en.json`)).default;
 
-const LocalizationContextProvider: React.FC<LocalizationContextProviderProps> = ({ children }) => {
+const LocalizationProvider: React.FC<LocalizationProviderProps> = ({ children }) => {
   const [language, setLanguage] = useState('en');
   const [localizationData, setLocalizationData] =
     useState<LocalizationDataType>(defaultLanguageData);
@@ -28,4 +28,4 @@ const LocalizationContextProvider: React.FC<LocalizationContextProviderProps> = 
   );
 };
 
-export default LocalizationContextProvider;
+export default LocalizationProvider;
