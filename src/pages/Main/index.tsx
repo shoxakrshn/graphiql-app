@@ -1,7 +1,7 @@
-import { useAppContext } from '../../app/context/AppContext';
+import { useLocalizationContext } from '../../app/context/localizationContext/LocalizationContext';
 
 const Main = () => {
-  const { localizationData, updateLanguage, language } = useAppContext();
+  const { localizationData, updateLanguage, language } = useLocalizationContext();
 
   const toggleLanguage = () => {
     const newLanguage = language === 'en' ? 'ru' : 'en';
