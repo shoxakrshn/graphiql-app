@@ -1,12 +1,12 @@
-import styles from './SignIn.module.scss';
-import loginImg from '../../app/assets/icons/login.svg';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Button } from '../../shared/ui';
-import { useNavigate } from 'react-router-dom';
-import { ButtonType } from '../../shared/utils/data';
 import Input from '../../shared/ui/Input';
+import { ButtonType } from '../../shared/utils/data';
+import loginImg from '../../app/assets/icons/login.svg';
+import styles from './SignIn.module.scss';
 
 export const userSchema = yup.object().shape({
   email: yup.string().email('It must be valid email').required('This field must not be empty'),

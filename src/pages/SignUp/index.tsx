@@ -1,12 +1,12 @@
-import styles from '../SignIn/SignIn.module.scss';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useNavigate } from 'react-router-dom';
+import * as yup from 'yup';
 import { ButtonType } from '../../shared/utils/data';
 import { Button } from '../../shared/ui';
-import loginImg from '../../app/assets/icons/login.svg';
 import Input from '../../shared/ui/Input';
-import * as yup from 'yup';
+import loginImg from '../../app/assets/icons/login.svg';
+import styles from '../SignIn/SignIn.module.scss';
 
 const userSchema = yup.object().shape({
   name: yup
