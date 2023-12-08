@@ -6,7 +6,7 @@
 
 .filled {
     @extend %button;
-    background-color: var(--color-primary);
+    background-color: var(--color-primary) !important;
     color: white;
     
     &:hover {
@@ -16,7 +16,7 @@
 
 .outlined {
     @extend %button;
-    background-color: var(--color-basic);
+    background-color: var(--color-basic) !important;
     color: var(--color-primary);
     border: 2px solid var(--color-primary);
 
