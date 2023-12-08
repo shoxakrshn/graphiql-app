@@ -1,17 +1,21 @@
-import { useLocalizationContext } from '../../app/context/localizationContext/LocalizationContext';
+import { useLanguage } from '../../app/context/LocalizationContext/LocalizationContext';
 
 const Main = () => {
-  const { localizationData, updateLanguage, language } = useLocalizationContext();
+  const { t, setLanguage } = useLanguage();
 
-  const toggleLanguage = () => {
-    const newLanguage = language === 'en' ? 'ru' : 'en';
-    updateLanguage(newLanguage);
+  const onEnClickHandler = () => {
+    setLanguage('en');
+  };
+
+  const onRuClickHandler = () => {
+    setLanguage('ru');
   };
 
   return (
     <div>
-      <button onClick={toggleLanguage}>{language === 'en' ? 'ru' : 'en'}</button>
-      <h3>{localizationData['sign-in']}</h3>
+      <button onClick={onEnClickHandler}>en</button>
+      <button onClick={onRuClickHandler}>ru</button>
+      <h3>{t('sign-in')}</h3>
     </div>
   );
 };
