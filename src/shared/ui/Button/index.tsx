@@ -13,9 +13,8 @@ export const Button: React.FC<ButtonProps> = ({
   text,
   onClick,
   typeButton = ButtonType.Filled,
-  type = 'button'
+  type = 'button',
 }) => {
-  
   return (
     <button
       className={typeButton === ButtonType.Filled ? styles.filled : styles.outlined}
