@@ -1,4 +1,4 @@
 export enum ButtonType {
-    Filled = ".filled",
-    Outlined = ".outlined",
+  Filled = '.filled',
+  Outlined = '.outlined',
 }

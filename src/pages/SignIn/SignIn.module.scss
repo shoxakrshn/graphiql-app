@@ -1,0 +1,53 @@
+@use '../../app/styles/abstracts/variables' as *;
+@use '../../app/styles/abstracts/mixins' as *;
+
+.wrapper{
+    @apply flex justify-center flex-wrap;
+
+    h1{
+      @include font-style($font-sans, $font-size-5xl, var(--color-accent), 600);
+    }
+}
+
+.content{
+    @apply flex justify-center flex-nowrap items-center;
+    width: 100%;
+}
+
+.blockForm {
+    @apply flex flex-col gap-4;
+    padding: 20px;
+    width: 450px;
+}
+
+.icon {
+    width: 450px;
+}
+
+.error {
+    color: var(--color-accent);
+}
+
+@media (max-width: $break-sm) {
+    .content {
+        @apply flex-col-reverse;
+    }
+
+    .icon {
+        width: 350px;
+    }
+
+    .blockForm {
+        width: 350px;
+    }  
+}
+
+@media (max-width: $break-xs) {
+    .icon {
+        width: 300px;
+    }
+
+    .blockForm {
+        width: 300px;
+    }  
+}
