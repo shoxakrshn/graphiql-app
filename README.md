@@ -1,30 +1,68 @@
-# React + TypeScript + Vite
+# GraphQL Playground
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Content Overview
 
-Currently, two official plugins are available:
+- [Introduction](#introduction)
+- [Features](#features)
+- [Getting started](#getting-started)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Scripts](#scripts)
+- [Developed by](#developed-by)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# <a name="introduction"></a> Introduction
 
-## Expanding the ESLint configuration
+GraphQL Playground is an interactive development environment for making GraphQL requests. It goes beyond the traditional GraphiQL tool, providing enhanced features and capabilities.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+# <a name="features"></a> Features
 
-- Configure the top-level `parserOptions` property like this:
+- Authorization and authentication capabilities, ensuring access to the tool is restricted to authorized users.
+- Ability to work with a user-specified open GraphQL endpoint.
+- User-friendly interface for seamless navigation and enhanced user experience.
+- Robust authentication and authorization for secure account management.
+- Interactive GraphiQL page with advanced features.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-};
+# <a name="getting-started"></a> Getting started
+
+To get started follow the instructions below for installation and usage.
+
+# <a name="installation"></a> Installation
+
+1. Clone this repo:
+
+```bash
+git clone https://github.com/shoxakrshn/RS-GraphiQL.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+2. Install project dependencies:
+
+```bash
+npm install
+```
+
+# <a name="usage"></a> Usage
+
+```bash
+npm run dev
+```
+
+This command will start dev server and you can access the app at [http://localhost:3000](http://localhost:3000) in your browser.
+
+# <a name="scripts"></a> Scripts
+
+- dev: Starts the development server.
+- build: Builds the project using TypeScript and Vite.
+- lint: Lints the TypeScript and TypeScript React files using ESLint.
+- lint-fix: Lints and automatically fixes the TypeScript and TypeScript React files using ESLint.
+- preview: Opens a preview of the project using Vite.
+- prettier: Applies Prettier formatting to the entire project.
+- eslint: Fixes ESLint issues in TypeScript and TypeScript React files.
+- test: Runs unit tests using Vitest.
+- coverage: Runs unit tests with coverage using Vitest and C8 coverage provider.
+- prepare: Installs Husky pre-commit hooks for ESLint.
+
+# <a name="developed-by"></a> Developed by
+
+- [Shahzod](https://github.com/shahzod222)
+- [Liza](https://github.com/LizavetaNik)
+- [Shoha](https://github.com/shoxakrshn)
