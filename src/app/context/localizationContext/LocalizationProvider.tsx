@@ -1,28 +1,20 @@
-import React, { ReactNode, useState } from 'react';
+import React, { PropsWithChildren, useState } from 'react';
 import { LocalizationContext } from './LocalizationContext';
-import { LocalizationDataType } from './types';
+import en from '../../localization/en.json';
+import ru from '../../localization/ru.json';
 
-interface LocalizationProviderProps {
-  children: ReactNode;
-}
+type LocalesType = {
+  [key: string]: string;
+};
 
-const defaultLanguageData = (await import(`../../localization/en.json`)).default;
-
-const LocalizationProvider: React.FC<LocalizationProviderProps> = ({ children }) => {
+const LocalizationProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [language, setLanguage] = useState('en');
-  const [localizationData, setLocalizationData] =
-    useState<LocalizationDataType>(defaultLanguageData);
+  const translations: Record<string, LocalesType> = { en, ru };
 
-  const updateLanguage = async (newLan: string) => {
-    setLanguage(newLan);
-
-    const res = await import(`../../localization/${newLan}.json`);
-    const newData = res.default;
-    setLocalizationData(newData);
-  };
+  const t = (key: string) => translations[language][key] || key;
 
   return (
-    <LocalizationContext.Provider value={{ language, updateLanguage, localizationData }}>
+    <LocalizationContext.Provider value={{ language, setLanguage, t }}>
       {children}
     </LocalizationContext.Provider>
   );
