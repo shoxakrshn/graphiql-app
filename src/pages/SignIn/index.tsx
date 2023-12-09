@@ -2,34 +2,25 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { useLanguage } from '../../app/context/localizationContext/LocalizationContext';
 import { Button } from '../../shared/ui';
 import Input from '../../shared/ui/Input';
-import { ButtonType } from '../../shared/utils/data';
+import { eButtonType } from '../../shared/utils/data';
+import { userSchema } from './validation';
 import loginImg from '../../app/assets/icons/login.svg';
 import styles from './SignIn.module.scss';
 
-export const userSchema = yup.object().shape({
-  email: yup.string().email('It must be valid email').required('This field must not be empty'),
-
-  password: yup
-    .string()
-    .required('This field must not be empty')
-    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])/, {
-      message: 'Password mustone uppercase, one lowercase, one number and one special character',
-    })
-    .min(8, 'Password must contain at least 8 characters'),
-});
-
-export type UserType = yup.InferType<typeof userSchema>;
-
 export const SignIn: React.FC = () => {
+  const { t } = useLanguage();
+  const schema = userSchema(t);
+  type UserType = yup.InferType<typeof schema>;
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<UserType>({
     mode: 'onSubmit',
-    resolver: yupResolver(userSchema),
+    resolver: yupResolver(schema),
   });
 
   const navigate = useNavigate();
@@ -41,23 +32,31 @@ export const SignIn: React.FC = () => {
 
   return (
     <div className={styles.wrapper}>
-      <h1>Sign in</h1>
+      <h1>{t('sign-in')}</h1>
       <div className={styles.content}>
         <div className={styles.loginIcon}>
           <img src={loginImg} alt="Login" className={styles.icon} />
         </div>
         <div className={styles.blockForm}>
           <form onSubmit={handleSubmit(onSubmitHandler)} noValidate className={styles.blockForm}>
-            <label htmlFor="email">
-              <Input type="email" id="email" placeholder="E-mail" register={register} />
-              {errors.email && <p className={styles.error}>{errors.email.message}</p>}
-            </label>
-            <label htmlFor="password">
-              <Input type="password" id="password" placeholder="Password" register={register} />
-              {errors.password && <p className={styles.error}>{errors.password.message}</p>}
-            </label>
+            <Input 
+              type="email" 
+              id="email" 
+              label="email"
+              placeholder="E-mail" 
+              error={errors.email?.message} 
+              {...register('email')} 
+            />
+            <Input 
+              type="password" 
+              id="password" 
+              label="password"
+              placeholder={t('password')} 
+              error={errors.password?.message} 
+              {...register('password')} 
+            />
 
-            <Button text="Sign in" typeButton={ButtonType.Filled} type="submit" />
+            <Button text={t('sign-in')} typeButton={eButtonType.Filled} type="submit" />
           </form>
         </div>
       </div>

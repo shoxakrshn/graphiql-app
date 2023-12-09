@@ -1,28 +1,30 @@
+import React from 'react';
 import styles from './Input.module.scss';
-import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
 
-interface InputProps<TFieldValues extends FieldValues> {
-  type: string;
-  id: keyof TFieldValues;
-  placeholder?: string;
-  register?: UseFormRegister<TFieldValues>;
+interface IInputProps extends React.InputHTMLAttributes<HTMLInputElement> { 
+  type: string; 
+  id: string; 
+  placeholder?: string; 
+  label?: string;
+  error?: string;
 }
 
-const Input = <TFieldValues extends FieldValues>({
-  type,
-  id,
-  placeholder,
-  register,
-}: InputProps<TFieldValues>) => {
+const Input = React.forwardRef<HTMLInputElement, IInputProps>(
+  ({ type, id, placeholder, label, error, ...restProps }, ref) => {
   return (
-    <input
-      type={type}
-      id="name"
-      placeholder={placeholder}
-      className={styles.formInput}
-      {...(register ? register(id as Path<TFieldValues>) : {})}
-    />
+    <div>
+        {label && <label htmlFor={id}></label>}
+        <input
+          type={type}
+          id={id}
+          placeholder={placeholder}
+          className={`${styles.formInput} ${error ? styles.errorInput : ''}`}
+          ref={ref}
+          {...restProps}
+        />
+        {error && <p className={styles.error}>{error}</p>}
+    </div>
   );
-};
+});
 
 export default Input;

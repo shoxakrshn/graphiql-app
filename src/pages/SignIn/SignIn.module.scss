@@ -1,6 +1,3 @@
-@use '../../app/styles/abstracts/variables' as *;
-@use '../../app/styles/abstracts/mixins' as *;
-
 .wrapper{
     @apply flex justify-center flex-wrap;
 
@@ -22,10 +19,6 @@
 
 .icon {
     width: 450px;
-}
-
-.error {
-    color: var(--color-accent);
 }
 
 @media (max-width: $break-sm) {

@@ -1,23 +1,23 @@
 import React from 'react';
-import { ButtonType } from '../../utils/data';
+import { eButtonType } from '../../utils/data';
 import styles from './Button.module.scss';
 
 interface ButtonProps {
   text: string;
   onClick?: () => void;
-  typeButton: ButtonType;
+  typeButton: eButtonType;
   type?: 'button' | 'submit';
 }
 
 export const Button: React.FC<ButtonProps> = ({
   text,
   onClick,
-  typeButton = ButtonType.Filled,
+  typeButton = eButtonType.Filled,
   type = 'button',
 }) => {
   return (
     <button
-      className={typeButton === ButtonType.Filled ? styles.filled : styles.outlined}
+      className={typeButton === eButtonType.Filled ? styles.filled : styles.outlined}
       onClick={onClick}
       type={type}
     >
