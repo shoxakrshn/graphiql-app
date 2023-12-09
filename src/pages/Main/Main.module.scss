@@ -1,0 +1,22 @@
+.wrapper{
+    @apply flex justify-center flex-wrap;
+
+    h1{
+      @include font-style($font-sans, $font-size-5xl, var(--color-accent), 600);
+    }
+}
+
+.content{
+    @apply flex justify-center flex-nowrap items-center;
+    width: 100%;
+}
+
+.blockForm {
+    @apply flex flex-col gap-4;
+    padding: 20px;
+    width: 450px;
+}
+
+.icon {
+    width: 450px;
+}

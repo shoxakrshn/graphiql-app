@@ -1,4 +1,11 @@
 {
   "sign-in": "Sign In",
-  "sign-up": "Sign Up"
+  "sign-up": "Sign Up",
+  "name": "Name",
+  "password": "Password",
+  "welcome": "Welcome",
+  "empty-field": "This field must not be empty",
+  "invalid-email": "It must be valid email",
+  "password-requirements": "Password mustone uppercase, one lowercase, one number and one special character",
+  "password-min-length": "Password must contain at least 8 characters"
 }

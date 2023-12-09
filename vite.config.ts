@@ -20,4 +20,11 @@ export default defineConfig({
       exclude: [],
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@use "./src/app/styles/abstracts/_index.scss" as *;`,
+      },
+    },
+  },
 });
