@@ -1,0 +1,37 @@
+.header {
+  @apply p-4 sticky top-0;
+  background-color: white;
+  transition: background-color 0.3s ease;
+
+  button {
+    @apply my-3;
+  }
+
+  &.scrolled {
+    background-color: var(--color-basic);
+  }
+}
+
+.container {
+  @apply mx-auto flex justify-between items-center;
+}
+
+.desktopMenu {
+  @apply hidden lg:flex space-x-4;
+}
+
+.menuButton {
+  @apply w-12 h-12;
+}
+
+.mobileMenu {
+  @apply lg:hidden;
+}
+
+.mobileMenuContent {
+  @apply lg:hidden p-4 flex flex-col;
+}
+
+.closeButton {
+  @apply w-7 h-7 ml-auto mb-4;
+}
