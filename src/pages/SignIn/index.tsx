@@ -6,7 +6,7 @@ import { useLanguage } from '../../app/context/localizationContext/LocalizationC
 import { Button } from '../../shared/ui';
 import Input from '../../shared/ui/Input';
 import { eButtonType } from '../../shared/utils/data';
-import { userSchema } from './validation';
+import { userSchema } from '../../shared/utils/validation';
 import loginImg from '../../app/assets/icons/login.svg';
 import styles from './SignIn.module.scss';
 
@@ -39,21 +39,21 @@ export const SignIn: React.FC = () => {
         </div>
         <div className={styles.blockForm}>
           <form onSubmit={handleSubmit(onSubmitHandler)} noValidate className={styles.blockForm}>
-            <Input 
-              type="email" 
-              id="email" 
+            <Input
+              type="email"
+              id="email"
               label="email"
-              placeholder="E-mail" 
-              error={errors.email?.message} 
-              {...register('email')} 
+              placeholder="E-mail"
+              error={errors.email?.message}
+              {...register('email')}
             />
-            <Input 
-              type="password" 
-              id="password" 
+            <Input
+              type="password"
+              id="password"
               label="password"
-              placeholder={t('password')} 
-              error={errors.password?.message} 
-              {...register('password')} 
+              placeholder={t('password')}
+              error={errors.password?.message}
+              {...register('password')}
             />
 
             <Button text={t('sign-in')} typeButton={eButtonType.Filled} type="submit" />
