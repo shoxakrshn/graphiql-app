@@ -1,16 +1,15 @@
-.wrapper{
-    @apply flex justify-center flex-wrap;
-  
+.wrapper {
+  @apply flex justify-center flex-wrap;
 }
 
-.content{
-    @apply flex flex-col justify-center gap-4;
-    
-    h1{
-        @include font-style($font-sans, $font-size-5xl, var(--color-accent), 600);
-    }
+.content {
+  @apply flex flex-col justify-center gap-4;
+}
 
-    p{
-      color: var(--color-primary);
-    }
+.title {
+  @include font-style($font-sans, $font-size-5xl, var(--color-accent), 600);
+}
+
+.text {
+  color: var(--color-primary);
 }
