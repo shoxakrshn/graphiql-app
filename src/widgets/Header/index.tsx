@@ -4,7 +4,7 @@ import burger from '../../app/assets/icons/burger.svg';
 import close from '../../app/assets/icons/close.svg';
 import { Button } from '../../shared/ui';
 import { eButtonType } from '../../shared/utils/data';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../../app/context/localizationContext/LocalizationContext';
 import styles from './Header.module.scss';
 
@@ -27,28 +27,26 @@ export const Header = () => {
   return (
     <header className={`${styles.header} ${isSticky ? styles.scrolled : ''}`}>
       <div className={styles.container}>
-        <div>
+        <Link to={'/'}>
           <img src={logo} alt="Logo" />
-        </div>
+        </Link>
 
         <div className={styles.desktopMenu}>
           <Registration />
         </div>
 
-        {!menuOpen && (
-          <div className={styles.mobileMenu}>
-            <button className={styles.menuButton} onClick={() => setMenuOpen(!menuOpen)}>
-              <img src={burger} alt="Burger Menu" />
-            </button>
-          </div>
-        )}
-
-        {menuOpen && (
+        {menuOpen ? (
           <div className={styles.mobileMenuContent}>
             <button className={styles.closeButton} onClick={() => setMenuOpen(false)}>
               <img src={close} alt="Close Menu" />
             </button>
             <Registration />
+          </div>
+        ) : (
+          <div className={styles.mobileMenu}>
+            <button className={styles.menuButton} onClick={() => setMenuOpen(true)}>
+              <img src={burger} alt="Burger Menu" />
+            </button>
           </div>
         )}
       </div>
@@ -57,7 +55,6 @@ export const Header = () => {
 };
 
 const Registration = () => {
-  const navigate = useNavigate();
   const { setLanguage, language, t } = useLanguage();
 
   const toggleLanguage = () => {
@@ -72,16 +69,12 @@ const Registration = () => {
         typeButton={eButtonType.Filled}
         onClick={toggleLanguage}
       />
-      <Button
-        text={t('sign-in')}
-        typeButton={eButtonType.Outlined}
-        onClick={() => navigate('/signin')}
-      />
-      <Button
-        text={t('sign-up')}
-        typeButton={eButtonType.Outlined}
-        onClick={() => navigate('/signup')}
-      />
+      <Link to="/signin">
+        <Button text={t('sign-in')} typeButton={eButtonType.Outlined} />
+      </Link>
+      <Link to="/signup">
+        <Button text={t('sign-up')} typeButton={eButtonType.Outlined} />
+      </Link>
     </>
   );
 };
