@@ -1,28 +1,19 @@
-import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../../app/context/localizationContext/LocalizationContext';
-import { Button } from '../../shared/ui';
 import { eButtonType } from '../../shared/utils/data';
 import styles from './NotFound.module.scss';
+import { AppLink } from '../../shared/ui/AppLink';
 
 const NotFound = () => {
   const { t } = useLanguage();
-  const navigate = useNavigate();
-
-  const goHome = () => {
-    navigate('/');
-  };
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
-        <h1>404</h1>
-        <p>{t('error-404')}</p>
-        <Button
-          text={t('go-home')}
-          onClick={goHome}
-          typeButton={eButtonType.Filled}
-          type="button"
-        />
+        <h1 className={styles.title}>404</h1>
+        <p className={styles.text}>{t('error-404')}</p>
+        <AppLink to="/" typeButton={eButtonType.Filled}>
+          {t('go-home')}
+        </AppLink>
       </div>
     </div>
   );
