@@ -7,5 +7,9 @@
   "empty-field": "This field must not be empty",
   "invalid-email": "It must be valid email",
   "password-requirements": "Password mustone uppercase, one lowercase, one number and one special character",
-  "password-min-length": "Password must contain at least 8 characters"
+  "password-min-length": "Password must contain at least 8 characters",
+  "welcome-header": "GRAPHIQL",
+  "welcome-subheader": "Application for your queries",
+  "welcome-info": "To use the application, sign up or sign in to your account",
+  "welcome-start": "Get started"
 }

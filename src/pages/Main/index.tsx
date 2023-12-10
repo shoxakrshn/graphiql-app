@@ -1,34 +1,21 @@
 import { useLanguage } from '../../app/context/localizationContext/LocalizationContext';
-import { eButtonType } from '../../shared/utils/data';
-import { Button } from '../../shared/ui';
 import loginImg from '../../app/assets/icons/welcome.svg';
 import styles from './Main.module.scss';
-import { useNavigate } from 'react-router-dom';
+import { Button } from '../../shared/ui';
+import { eButtonType } from '../../shared/utils/data';
 
 const Main = () => {
-  const { t, setLanguage, language } = useLanguage();
-  const navigate = useNavigate();
-  const toggleLanguage = () => {
-    const newLanguage = language === 'en' ? 'ru' : 'en';
-    setLanguage(newLanguage);
-  };
-
-  const goToSignIn = () => {
-    navigate('/SignIn');
-  }
-
-  const goToSignUp = () => {
-    navigate('/SignUp');
-  }
+  const { t } = useLanguage();
 
   return (
     <div className={styles.wrapper}>
       <h1>{t('welcome')}</h1>
       <div className={styles.content}>
-        <div className={styles.blockForm}>
-          <button onClick={toggleLanguage}>{language === 'en' ? 'ru' : 'en'}</button>
-          <Button text={t('sign-in')} onClick={goToSignIn} typeButton={eButtonType.Filled} type="button" />
-          <Button text={t('sign-up')} onClick={goToSignUp} typeButton={eButtonType.Filled} type="button" />
+        <div className={styles.info}>
+          <h2>{t('welcome-header')}</h2>
+          <h3>{t('welcome-subheader')}</h3>
+          <p>{t('welcome-info')}</p>
+          <Button text={t('welcome-start')} typeButton={eButtonType.Filled} />
         </div>
         <div className={styles.loginIcon}>
           <img src={loginImg} alt="Login" className={styles.icon} />

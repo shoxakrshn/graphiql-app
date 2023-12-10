@@ -1,22 +1,33 @@
-.wrapper{
-    @apply flex justify-center flex-wrap;
+.wrapper {
+  @apply flex justify-center flex-wrap items-center;
 
-    h1{
-      @include font-style($font-sans, $font-size-5xl, var(--color-accent), 600);
-    }
+  h1 {
+    @include font-style($font-sans, $font-size-5xl, var(--color-accent), 600);
+  }
+
+  h2 {
+    @include font-style($font-sans, $font-size-4xl, var(--color-accent), 600);
+  }
+
+  h3 {
+    @include font-style($font-sans, $font-size-2xl, var(--color-primary), 600);
+  }
+
+  p {
+    @apply my-3;
+  }
 }
 
-.content{
-    @apply flex justify-center flex-nowrap items-center;
-    width: 100%;
+.content {
+  @apply flex justify-center flex-wrap items-center;
+  width: 100%;
 }
 
-.blockForm {
-    @apply flex flex-col gap-4;
-    padding: 20px;
-    width: 450px;
+.info,
+.loginIcon {
+  @apply mx-3;
 }
 
 .icon {
-    width: 450px;
+  width: 450px;
 }
