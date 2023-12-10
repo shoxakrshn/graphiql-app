@@ -1,10 +1,10 @@
 .header {
-  @apply p-4 sticky top-0;
+  @apply px-2 py-1 sticky top-0;
   background-color: white;
   transition: background-color 0.3s ease;
 
   button {
-    @apply my-3;
+    @apply my-1;
   }
 
   &.scrolled {
@@ -29,7 +29,7 @@
 }
 
 .mobileMenuContent {
-  @apply lg:hidden p-4 flex flex-col;
+  @apply lg:hidden flex p-2 flex-col;
 }
 
 .closeButton {
