@@ -12,9 +12,15 @@ export const Footer = () => {
   return (
     <div className={styles.footer}>
       <div className={styles.gitIcons}>
-        <GithubLink name={eGits.liza} />
-        <GithubLink name={eGits.shahzod} />
-        <GithubLink name={eGits.shoha} />
+        <a href={`https://github.com/${eGits.liza}`} target="_blank" rel="noreferrer">
+          <img src={gitIcon} />
+        </a>
+        <a href={`https://github.com/${eGits.shahzod}`} target="_blank" rel="noreferrer">
+          <img src={gitIcon} />
+        </a>
+        <a href={`https://github.com/${eGits.shoha}`} target="_blank" rel="noreferrer">
+          <img src={gitIcon} />
+        </a>
       </div>
 
       <a href="https://rs.school/react/" target="_blank" rel="noreferrer">
@@ -23,13 +29,5 @@ export const Footer = () => {
 
       <p>© 2023 QraphiQL All Rights Reserved.</p>
     </div>
-  );
-};
-
-const GithubLink = (props: { name: string }) => {
-  return (
-    <a href={`https://github.com/${props.name}`} target="_blank" rel="noreferrer">
-      <img src={gitIcon} />
-    </a>
   );
 };
