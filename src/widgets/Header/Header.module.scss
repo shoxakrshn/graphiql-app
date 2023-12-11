@@ -3,10 +3,6 @@
   background-color: white;
   transition: background-color 0.3s ease;
 
-  button {
-    @apply my-1;
-  }
-
   &.scrolled {
     background-color: var(--color-basic);
   }
@@ -14,24 +10,4 @@
 
 .container {
   @apply mx-auto flex justify-between items-center;
-}
-
-.desktopMenu {
-  @apply hidden lg:flex space-x-4 items-center;
-}
-
-.menuButton {
-  @apply w-12 h-12;
-}
-
-.mobileMenu {
-  @apply lg:hidden;
-}
-
-.mobileMenuContent {
-  @apply lg:hidden flex p-2 flex-col;
-}
-
-.closeButton {
-  @apply w-7 h-7 ml-auto mb-4;
 }
