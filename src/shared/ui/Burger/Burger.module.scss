@@ -1,0 +1,12 @@
+.closeButton {
+  @apply w-7 h-7 ml-auto mb-4;
+}
+
+.menuButton {
+  @apply w-12 h-12;
+}
+
+.closeButton,
+.mobileMenu {
+  @apply lg:hidden;
+}
