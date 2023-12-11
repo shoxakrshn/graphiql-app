@@ -15,11 +15,11 @@ const Main = () => {
 
   const goToSignIn = () => {
     navigate('/SignIn');
-  }
+  };
 
   const goToSignUp = () => {
     navigate('/SignUp');
-  }
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -27,8 +27,18 @@ const Main = () => {
       <div className={styles.content}>
         <div className={styles.blockForm}>
           <button onClick={toggleLanguage}>{language === 'en' ? 'ru' : 'en'}</button>
-          <Button text={t('sign-in')} onClick={goToSignIn} typeButton={eButtonType.Filled} type="button" />
-          <Button text={t('sign-up')} onClick={goToSignUp} typeButton={eButtonType.Filled} type="button" />
+          <Button
+            text={t('sign-in')}
+            onClick={goToSignIn}
+            typeButton={eButtonType.Filled}
+            type="button"
+          />
+          <Button
+            text={t('sign-up')}
+            onClick={goToSignUp}
+            typeButton={eButtonType.Filled}
+            type="button"
+          />
         </div>
         <div className={styles.loginIcon}>
           <img src={loginImg} alt="Login" className={styles.icon} />
