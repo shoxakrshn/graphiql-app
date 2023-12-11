@@ -1,4 +1,4 @@
 export enum eButtonType {
-  Filled = '.filled',
-  Outlined = '.outlined',
+  Filled = 'filled',
+  Outlined = 'outlined',
 }
