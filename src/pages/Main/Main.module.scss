@@ -1,20 +1,35 @@
 .wrapper {
-  @apply flex justify-center flex-wrap;
-
-  h1 {
-    @include font-style($font-sans, $font-size-5xl, var(--color-accent), 600);
-  }
+  @apply flex justify-center flex-wrap items-center;
 }
 
-.content {
-  @apply flex justify-center flex-nowrap items-center;
+.title {
+  @include font-style($font-sans, $font-size-5xl, var(--color-accent), 600);
+}
+
+.header {
+  @include font-style($font-sans, $font-size-4xl, var(--color-accent), 600);
+}
+
+.subheader {
+  @include font-style($font-sans, $font-size-2xl, var(--color-primary), 600);
+}
+
+.info {
+  @apply my-3;
+}
+
+.container {
+  @apply flex justify-center flex-wrap items-center;
   width: 100%;
 }
 
-.blockForm {
-  @apply flex flex-col gap-4;
-  padding: 20px;
-  width: 450px;
+.content {
+  @apply lg:w-[30%] sm:w-full md:w-[30%] my-3;
+}
+
+.content,
+.image {
+  @apply mx-3;
 }
 
 .icon {
