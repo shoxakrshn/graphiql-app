@@ -1,25 +1,26 @@
-%button {
-  @apply w-full rounded-[20px] p-1;
+%link {
+  @apply w-full text-center;
+  @apply rounded-[20px] p-1;
 }
 
 .filled {
-  @extend %button;
+  @extend %link;
   background-color: var(--color-primary) !important;
   color: white;
 
   &:hover {
-    background-color: var(--color-hover);
+    background-color: var(--color-hover) !important;
   }
 }
 
 .outlined {
-  @extend %button;
+  @extend %link;
   background-color: var(--color-basic) !important;
   color: var(--color-primary);
   border: 2px solid var(--color-primary);
 
   &:hover {
-    background-color: var(--color-primary);
+    background-color: var(--color-primary) !important;
     color: white;
   }
 }

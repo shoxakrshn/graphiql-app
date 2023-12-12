@@ -1,6 +1,16 @@
 @use 'abstracts' as *;
 @use 'base' as *;
 
+body {
+  @apply flex flex-col m-0;
+  min-height: 100vh;
+}
+
+#root {
+  @apply flex flex-col;
+  flex: 1;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
