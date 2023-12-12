@@ -9,5 +9,7 @@
   "password-requirements": "Password mustone uppercase, one lowercase, one number and one special character",
   "password-min-length": "Password must contain at least 8 characters",
   "error-404": "This page doesn't exist.",
-  "go-home": "Go home"
+  "go-home": "Go home",
+  "error-sing-up": "You entered your email or password incorrectly. Please double check!",
+  "error-sing-in": "This email is already in the database!"
 }

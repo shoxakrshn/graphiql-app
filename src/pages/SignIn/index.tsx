@@ -2,11 +2,17 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useLanguage } from '../../app/context/localizationContext/LocalizationContext';
 import { Button } from '../../shared/ui';
 import Input from '../../shared/ui/Input';
 import { eButtonType } from '../../shared/utils/data';
 import { userSchema } from '../../shared/utils/validation';
+import app from '../firebaseConfig';
 import loginImg from '../../app/assets/icons/login.svg';
 import styles from './SignIn.module.scss';
 
@@ -26,8 +32,18 @@ export const SignIn: React.FC = () => {
   const navigate = useNavigate();
 
   const onSubmitHandler = async (values: UserType) => {
-    console.log(values);
-    navigate('/editor');
+    try {
+      const { email, password } = values;
+      const auth = getAuth(app);
+
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      //TODO save token
+      console.log(user);
+      navigate('/editor');
+    } catch (error) {
+      toast.error(t('error-sing-in'));
+    }
   };
 
   return (
@@ -60,6 +76,7 @@ export const SignIn: React.FC = () => {
           </form>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
