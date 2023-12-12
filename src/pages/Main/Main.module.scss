@@ -1,30 +1,34 @@
 .wrapper {
   @apply flex justify-center flex-wrap items-center;
-
-  h1 {
-    @include font-style($font-sans, $font-size-5xl, var(--color-accent), 600);
-  }
-
-  h2 {
-    @include font-style($font-sans, $font-size-4xl, var(--color-accent), 600);
-  }
-
-  h3 {
-    @include font-style($font-sans, $font-size-2xl, var(--color-primary), 600);
-  }
-
-  p {
-    @apply my-3;
-  }
 }
 
-.content {
+.title {
+  @include font-style($font-sans, $font-size-5xl, var(--color-accent), 600);
+}
+
+.header {
+  @include font-style($font-sans, $font-size-4xl, var(--color-accent), 600);
+}
+
+.subheader {
+  @include font-style($font-sans, $font-size-2xl, var(--color-primary), 600);
+}
+
+.info {
+  @apply my-3;
+}
+
+.container {
   @apply flex justify-center flex-wrap items-center;
   width: 100%;
 }
 
-.info,
-.loginIcon {
+.content {
+  @apply lg:w-[30%] sm:w-full md:w-[30%] my-3;
+}
+
+.content,
+.image {
   @apply mx-3;
 }
 

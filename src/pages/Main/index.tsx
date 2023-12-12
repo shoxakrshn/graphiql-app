@@ -9,15 +9,17 @@ const Main = () => {
 
   return (
     <div className={styles.wrapper}>
-      <h1>{t('welcome')}</h1>
-      <div className={styles.content}>
-        <div className={styles.info}>
-          <h2>{t('welcome-header')}</h2>
-          <h3>{t('welcome-subheader')}</h3>
-          <p>{t('welcome-info')}</p>
+      <h1 className={styles.title}>{t('welcome')}</h1>
+
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <h2 className={styles.header}>{t('welcome-header')}</h2>
+          <h3 className={styles.subheader}>{t('welcome-subheader')}</h3>
+          <p className={styles.info}>{t('welcome-info')}</p>
           <Button text={t('welcome-start')} typeButton={eButtonType.Filled} />
         </div>
-        <div className={styles.loginIcon}>
+
+        <div className={styles.image}>
           <img src={loginImg} alt="Login" className={styles.icon} />
         </div>
       </div>
