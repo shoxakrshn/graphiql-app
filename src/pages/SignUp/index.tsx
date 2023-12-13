@@ -37,10 +37,10 @@ export const SignUp: React.FC = () => {
       const auth = getAuth(app);
 
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
-      //TODO save token
-      console.log(user);
-
+      const user = JSON.parse(JSON.stringify(userCredential.user));
+      localStorage.setItem('email', email);
+      localStorage.setItem('token', user.stsTokenManager.expirationTime);
+      localStorage.setItem('expirationTimeToken', user.stsTokenManager.accessToken);
       navigate('/editor');
     } catch (error) {
       toast.error(t('error-sing-up'));

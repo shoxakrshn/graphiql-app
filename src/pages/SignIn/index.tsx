@@ -37,9 +37,10 @@ export const SignIn: React.FC = () => {
       const auth = getAuth(app);
 
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
-      //TODO save token
-      console.log(user);
+      const user = JSON.parse(JSON.stringify(userCredential.user));
+      localStorage.setItem('email', email);
+      localStorage.setItem('token', user.stsTokenManager.accessToken);
+      localStorage.setItem('expirationTimeToken', user.stsTokenManager.expirationTime);
       navigate('/editor');
     } catch (error) {
       toast.error(t('error-sing-in'));
