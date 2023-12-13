@@ -8,7 +8,6 @@ import { LanguageToggler } from '../LanguageToggler';
 import { auth } from '../../../app/firebase/firebaseConfig';
 import styles from './NavMenu.module.scss';
 import { cleanAuth } from '../../../app/store/slices/authSlices';
-import { StoreProvider } from '../../../app/store/StoreProvider';
 
 type PropsType = {
   userStatus: boolean;
@@ -30,30 +29,28 @@ export const NavMenu: React.FC<PropsType> = ({ userStatus, layout, email }) => {
   };
 
   return (
-    <StoreProvider>
-      <div className={styles[layout]}>
-        <LanguageToggler />
-        {userStatus && <h3>{email}</h3>}
+    <div className={styles[layout]}>
+      <LanguageToggler />
+      {userStatus && <h3>{email}</h3>}
 
-        {userStatus ? (
-          <Button
-            text={t('log-out')}
-            onClick={handleSignOut}
-            typeButton={eButtonType.Outlined}
-            type="button"
-          />
-        ) : (
-          <AppLink to={'/signin'} typeButton={eButtonType.Outlined}>
-            {t('sign-in')}
-          </AppLink>
-        )}
-
-        <AppLink to={userStatus ? '/editor' : '/signup'} typeButton={eButtonType.Outlined}>
-          {userStatus ? t('graphiql') : t('sign-up')}
+      {userStatus ? (
+        <Button
+          text={t('log-out')}
+          onClick={handleSignOut}
+          typeButton={eButtonType.Outlined}
+          type="button"
+        />
+      ) : (
+        <AppLink to={'/signin'} typeButton={eButtonType.Outlined}>
+          {t('sign-in')}
         </AppLink>
+      )}
 
-        <ToastContainer />
-      </div>
-    </StoreProvider>
+      <AppLink to={userStatus ? '/editor' : '/signup'} typeButton={eButtonType.Outlined}>
+        {userStatus ? t('graphiql') : t('sign-up')}
+      </AppLink>
+
+      <ToastContainer />
+    </div>
   );
 };

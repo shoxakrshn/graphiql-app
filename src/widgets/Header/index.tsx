@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import styles from './Header.module.scss';
 import { Burger, NavMenu } from '../../shared/ui';
 import { auth } from '../../app/firebase/firebaseConfig';
+import { StoreProvider } from '../../app/store/StoreProvider';
 
 export const Header = () => {
   const [isSticky, setIsSticky] = useState(false);
@@ -40,18 +41,20 @@ export const Header = () => {
   }, []);
 
   return (
-    <header className={`${styles.header} ${isSticky ? styles.scrolled : ''}`}>
-      <div className={styles.container}>
-        <Link to={'/'}>
-          <img src={logo} alt="Logo" />
-        </Link>
+    <StoreProvider>
+      <header className={`${styles.header} ${isSticky ? styles.scrolled : ''}`}>
+        <div className={styles.container}>
+          <Link to={'/'}>
+            <img src={logo} alt="Logo" />
+          </Link>
 
-        <NavMenu userStatus={isUser} layout={'desktop'} email={userEmail} />
+          <NavMenu userStatus={isUser} layout={'desktop'} email={userEmail} />
 
-        <Burger>
-          <NavMenu userStatus={isUser} layout={'mobile'} email={userEmail} />
-        </Burger>
-      </div>
-    </header>
+          <Burger>
+            <NavMenu userStatus={isUser} layout={'mobile'} email={userEmail} />
+          </Burger>
+        </div>
+      </header>
+    </StoreProvider>
   );
 };
