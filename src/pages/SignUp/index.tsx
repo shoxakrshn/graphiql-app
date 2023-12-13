@@ -2,11 +2,11 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import app from '../firebaseConfig';
+import { auth } from '../../app/firebase/firebaseConfig';
 import { useLanguage } from '../../app/context/localizationContext/LocalizationContext';
 import { eButtonType } from '../../shared/utils/data';
 import { userSchema } from '../../shared/utils/validation';
@@ -14,7 +14,6 @@ import { Button } from '../../shared/ui';
 import Input from '../../shared/ui/Input';
 import loginImg from '../../app/assets/icons/login.svg';
 import styles from '../SignIn/SignIn.module.scss';
-import { useEffect } from 'react';
 
 export const SignUp: React.FC = () => {
   const { t } = useLanguage();
@@ -33,28 +32,17 @@ export const SignUp: React.FC = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    const expirationTimeToken = localStorage.getItem('expirationTimeToken');
-    if (
-      token !== null ||
-      (expirationTimeToken !== null && new Date().getTime() < parseInt(expirationTimeToken, 10))
-    ) {
-      navigate('/', { replace: true });
-    }
-  }, []);
-
   const onSubmitHandler = async (values: UserType) => {
     try {
       const { email, password } = values;
-      const auth = getAuth(app);
 
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const user = JSON.parse(JSON.stringify(userCredential.user));
-      localStorage.setItem('email', email);
-      localStorage.setItem('token', user.stsTokenManager.expirationTime);
-      localStorage.setItem('expirationTimeToken', user.stsTokenManager.accessToken);
-      navigate('/editor');
+      //const userCredential =
+      await createUserWithEmailAndPassword(auth, email, password);
+      //const user = JSON.parse(JSON.stringify(userCredential.user));
+      //localStorage.setItem('email', email);
+      //localStorage.setItem('token', user.stsTokenManager.expirationTime);
+      //localStorage.setItem('expirationTimeToken', user.stsTokenManager.accessToken);
+      navigate('/');
     } catch (error) {
       toast.error(t('error-sing-up'));
     }
