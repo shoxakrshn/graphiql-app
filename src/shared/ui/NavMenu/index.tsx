@@ -1,4 +1,5 @@
 import { ToastContainer, toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
 import { useLanguage } from '../../../app/context/localizationContext/LocalizationContext';
 import { eButtonType } from '../../utils/data';
 import { AppLink } from '../AppLink';
@@ -6,6 +7,8 @@ import { Button } from '../Button';
 import { LanguageToggler } from '../LanguageToggler';
 import { auth } from '../../../app/firebase/firebaseConfig';
 import styles from './NavMenu.module.scss';
+import { cleanAuth } from '../../../app/store/slices/authSlices';
+import { StoreProvider } from '../../../app/store/StoreProvider';
 
 type PropsType = {
   userStatus: boolean;
@@ -15,38 +18,42 @@ type PropsType = {
 
 export const NavMenu: React.FC<PropsType> = ({ userStatus, layout, email }) => {
   const { t } = useLanguage();
+  const dispatch = useDispatch();
 
   const handleSignOut = async () => {
     try {
       await auth.signOut();
+      dispatch(cleanAuth());
     } catch (error) {
       toast.error(t('error-sing-up'));
     }
   };
 
   return (
-    <div className={styles[layout]}>
-      <LanguageToggler />
-      {userStatus && <h3>{email}</h3>}
+    <StoreProvider>
+      <div className={styles[layout]}>
+        <LanguageToggler />
+        {userStatus && <h3>{email}</h3>}
 
-      {userStatus ? (
-        <Button
-          text={t('log-out')}
-          onClick={handleSignOut}
-          typeButton={eButtonType.Outlined}
-          type="button"
-        />
-      ) : (
-        <AppLink to={'/signin'} typeButton={eButtonType.Outlined}>
-          {t('sign-in')}
+        {userStatus ? (
+          <Button
+            text={t('log-out')}
+            onClick={handleSignOut}
+            typeButton={eButtonType.Outlined}
+            type="button"
+          />
+        ) : (
+          <AppLink to={'/signin'} typeButton={eButtonType.Outlined}>
+            {t('sign-in')}
+          </AppLink>
+        )}
+
+        <AppLink to={userStatus ? '/editor' : '/signup'} typeButton={eButtonType.Outlined}>
+          {userStatus ? t('graphiql') : t('sign-up')}
         </AppLink>
-      )}
 
-      <AppLink to={userStatus ? '/editor' : '/signup'} typeButton={eButtonType.Outlined}>
-        {userStatus ? t('graphiql') : t('sign-up')}
-      </AppLink>
-
-      <ToastContainer />
-    </div>
+        <ToastContainer />
+      </div>
+    </StoreProvider>
   );
 };
