@@ -17,6 +17,20 @@ const Main = () => {
           <h3 className={styles.subheader}>{t('welcome-subheader')}</h3>
           <p className={styles.info}>{t('welcome-info')}</p>
           <Button text={t('welcome-start')} typeButton={eButtonType.Filled} />
+          <div className={styles.team}>
+            <div className={styles.teamMember}>
+              <h4>Shoha</h4>
+              <p>Team-Lead, Frontend Developer</p>
+            </div>
+            <div className={styles.teamMember}>
+              <h4>Liza</h4>
+              <p>Frontend Developer, Designer</p>
+            </div>
+            <div className={styles.teamMember}>
+              <h4>Shahzod</h4>
+              <p>Frontend Developer, Tech-Lead</p>
+            </div>
+          </div>
         </div>
 
         <div className={styles.image}>

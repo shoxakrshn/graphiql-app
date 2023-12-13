@@ -19,12 +19,17 @@
 }
 
 .container {
-  @apply flex justify-center flex-wrap items-center;
+  @apply flex justify-around flex-wrap items-center;
   width: 100%;
 }
 
 .content {
-  @apply lg:w-[30%] sm:w-full md:w-[30%] my-3;
+  @apply flex  justify-center flex-col;
+  width: 35%;
+}
+
+.image {
+  width: 40%;
 }
 
 .content,
@@ -34,4 +39,22 @@
 
 .icon {
   width: 450px;
+}
+
+.team {
+  @apply my-1;
+}
+
+.teamMember {
+  @apply my-1;
+}
+
+@media screen and (max-width: 768px) {
+  .content {
+    width: 70%;
+  }
+
+  .image {
+    display: none;
+  }
 }
