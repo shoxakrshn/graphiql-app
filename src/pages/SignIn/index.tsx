@@ -15,6 +15,7 @@ import { userSchema } from '../../shared/utils/validation';
 import app from '../firebaseConfig';
 import loginImg from '../../app/assets/icons/login.svg';
 import styles from './SignIn.module.scss';
+import { useEffect } from 'react';
 
 export const SignIn: React.FC = () => {
   const { t } = useLanguage();
@@ -30,6 +31,17 @@ export const SignIn: React.FC = () => {
   });
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const expirationTimeToken = localStorage.getItem('expirationTimeToken');
+    if (
+      token !== null ||
+      (expirationTimeToken !== null && new Date().getTime() < parseInt(expirationTimeToken, 10))
+    ) {
+      navigate('/', { replace: true });
+    }
+  }, []);
 
   const onSubmitHandler = async (values: UserType) => {
     try {

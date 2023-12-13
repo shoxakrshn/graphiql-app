@@ -14,6 +14,7 @@ import { Button } from '../../shared/ui';
 import Input from '../../shared/ui/Input';
 import loginImg from '../../app/assets/icons/login.svg';
 import styles from '../SignIn/SignIn.module.scss';
+import { useEffect } from 'react';
 
 export const SignUp: React.FC = () => {
   const { t } = useLanguage();
@@ -30,6 +31,17 @@ export const SignUp: React.FC = () => {
   });
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const expirationTimeToken = localStorage.getItem('expirationTimeToken');
+    if (
+      token !== null ||
+      (expirationTimeToken !== null && new Date().getTime() < parseInt(expirationTimeToken, 10))
+    ) {
+      navigate('/', { replace: true });
+    }
+  }, []);
 
   const onSubmitHandler = async (values: UserType) => {
     try {
