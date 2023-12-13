@@ -18,6 +18,7 @@ import { useEffect } from 'react';
 
 export const SignUp: React.FC = () => {
   const { t } = useLanguage();
+
   const schema = userSchema(t);
   type UserType = yup.InferType<typeof schema>;
 

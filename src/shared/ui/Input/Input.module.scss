@@ -1,14 +1,14 @@
 .formInput {
-    border-radius: 5px;
-    border: 2px solid var(--color-primary);
-    height: 50px;
-    width: 100%;
-    padding: 0.5rem;
-  
-    &::placeholder {
-      color: var(--color-placeholder);
-      opacity: 1;
-    }
+  border-radius: 5px;
+  border: 2px solid var(--color-primary);
+  height: 50px;
+  width: 100%;
+  padding: 0.5rem;
+
+  &::placeholder {
+    color: var(--color-placeholder);
+    opacity: 1;
+  }
 }
 
 .error {
