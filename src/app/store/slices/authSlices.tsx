@@ -31,26 +31,24 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    createAuth: (state) => {
-      onAuthStateChanged(auth, (currentUser) => {
-        if (currentUser) {
-          state.isUser = true;
-          state.userEmail = currentUser?.email;
-        } else {
-          state.isUser = false;
-          state.userEmail = null;
-        }
-      });
+    createAuth: (state, action) => {
+      const { payload } = action;
+      if (payload && payload.email) {
+        state.isUser = true;
+        state.userEmail = payload.email;
+      }
     },
     cleanAuth: (state) => {
+      auth.signOut();
       state.isUser = false;
       state.userEmail = null;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(checkAuth.fulfilled, (state, action) => {
-      state.isUser = !!action.payload.email;
-      state.userEmail = action.payload.email;
+      const { payload } = action;
+      state.isUser = !!payload.email;
+      state.userEmail = payload.email;
     });
   },
 });
