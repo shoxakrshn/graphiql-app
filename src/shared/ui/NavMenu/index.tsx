@@ -1,12 +1,13 @@
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { useLanguage } from '../../../app/context/localizationContext/LocalizationContext';
 import { eButtonType } from '../../utils/data';
 import { AppLink } from '../AppLink';
 import { Button } from '../Button';
 import { LanguageToggler } from '../LanguageToggler';
-import styles from './NavMenu.module.scss';
 import { cleanAuth } from '../../../app/store/slices/authSlices';
+import { auth } from '../../../app/firebase/firebaseConfig';
+import styles from './NavMenu.module.scss';
 
 type PropsType = {
   userStatus: boolean;
@@ -19,7 +20,12 @@ export const NavMenu: React.FC<PropsType> = ({ userStatus, layout, email }) => {
   const dispatch = useDispatch();
 
   const handleSignOut = async () => {
-    dispatch(cleanAuth());
+    try {
+      await auth.signOut();
+      dispatch(cleanAuth());
+    } catch (error) {
+      toast.error(t('error-sing-out'));
+    }
   };
 
   return (

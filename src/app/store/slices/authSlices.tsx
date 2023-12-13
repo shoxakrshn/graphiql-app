@@ -2,6 +2,13 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { auth } from '../../firebase/firebaseConfig';
 
+const storedIsUserString = localStorage.getItem('isUser');
+const storedIsUser =
+  storedIsUserString !== undefined && storedIsUserString !== null
+    ? JSON.parse(storedIsUserString)
+    : false;
+const storedUserEmail = localStorage.getItem('userEmail');
+
 export interface AuthState {
   isUser: boolean;
   userEmail: string | null;
@@ -12,8 +19,8 @@ interface CheckAuthFulfilledPayload {
 }
 
 const initialState: AuthState = {
-  isUser: false,
-  userEmail: null,
+  isUser: storedIsUser || false,
+  userEmail: storedUserEmail || null,
 };
 
 export const checkAuth = createAsyncThunk<CheckAuthFulfilledPayload, void>(
@@ -36,20 +43,17 @@ const authSlice = createSlice({
       if (payload && payload.email) {
         state.isUser = true;
         state.userEmail = payload.email;
+
+        localStorage.setItem('isUser', 'true');
+        localStorage.setItem('userEmail', payload.email);
       }
     },
     cleanAuth: (state) => {
-      auth.signOut();
       state.isUser = false;
       state.userEmail = null;
+      localStorage.removeItem('isUser');
+      localStorage.removeItem('userEmail');
     },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(checkAuth.fulfilled, (state, action) => {
-      const { payload } = action;
-      state.isUser = !!payload.email;
-      state.userEmail = payload.email;
-    });
   },
 });
 

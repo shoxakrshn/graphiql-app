@@ -13,6 +13,7 @@ export const Header = () => {
   const [isSticky, setIsSticky] = useState(false);
   const isUser = useSelector((state: { auth: AuthState }) => state.auth.isUser);
   const userEmail = useSelector((state: { auth: AuthState }) => state.auth.userEmail);
+
   const dispatch = useDispatch();
 
   const handleScroll = () => {
