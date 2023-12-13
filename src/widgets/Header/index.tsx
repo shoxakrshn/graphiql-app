@@ -6,20 +6,21 @@ import styles from './Header.module.scss';
 import { Burger, NavMenu } from '../../shared/ui';
 import { auth } from '../../app/firebase/firebaseConfig';
 import { StoreProvider } from '../../app/store/StoreProvider';
+import { AuthState, cleanAuth, createAuth } from '../../app/store/slices/authSlices';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const Header = () => {
   const [isSticky, setIsSticky] = useState(false);
-  const [isUser, setIsUser] = useState(false);
-  const [userEmail, setUserEmail] = useState<string | null>('');
+  const isUser = useSelector((state: { auth: AuthState }) => state.auth.isUser);
+  const userEmail = useSelector((state: { auth: AuthState }) => state.auth.userEmail);
+  const dispatch = useDispatch();
 
   const onAuthChanged = () => {
     onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
-        setIsUser(true);
-        setUserEmail(currentUser?.email);
+        dispatch(createAuth());
       } else {
-        setIsUser(false);
-        setUserEmail(null);
+        dispatch(cleanAuth());
       }
     });
   };
