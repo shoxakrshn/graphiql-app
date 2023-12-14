@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
@@ -12,6 +14,7 @@ import { eButtonType } from '../../shared/utils/data';
 import { userSchema } from '../../shared/utils/validation';
 import { Button } from '../../shared/ui';
 import Input from '../../shared/ui/Input';
+import { selectIsUser } from '../../app/store/slices/authSlices';
 import loginImg from '../../app/assets/icons/login.svg';
 import styles from '../SignIn/SignIn.module.scss';
 
@@ -31,22 +34,25 @@ export const SignUp: React.FC = () => {
   });
 
   const navigate = useNavigate();
+  const isUser = useSelector(selectIsUser);
 
   const onSubmitHandler = async (values: UserType) => {
     try {
       const { email, password } = values;
 
-      //const userCredential =
       await createUserWithEmailAndPassword(auth, email, password);
-      //const user = JSON.parse(JSON.stringify(userCredential.user));
-      //localStorage.setItem('email', email);
-      //localStorage.setItem('token', user.stsTokenManager.expirationTime);
-      //localStorage.setItem('expirationTimeToken', user.stsTokenManager.accessToken);
+
       navigate('/');
     } catch (error) {
       toast.error(t('error-sing-up'));
     }
   };
+
+  useEffect(() => {
+    if (isUser) {
+      navigate('/', { replace: true });
+    }
+  }, []);
 
   return (
     <div className={styles.wrapper}>

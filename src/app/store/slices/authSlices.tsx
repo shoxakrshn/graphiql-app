@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { auth } from '../../firebase/firebaseConfig';
+import { RootState } from '../store';
 
 const storedIsUserString = localStorage.getItem('isUser');
 const storedIsUser =
@@ -59,3 +60,7 @@ const authSlice = createSlice({
 
 export default authSlice.reducer;
 export const { createAuth, cleanAuth } = authSlice.actions;
+
+export const selectAuth = (state: RootState) => state.auth;
+export const selectIsUser = (state: RootState) => selectAuth(state).isUser;
+export const selectUserEmail = (state: RootState) => selectAuth(state).userEmail;

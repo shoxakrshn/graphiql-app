@@ -1,21 +1,14 @@
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { selectIsUser } from '../../app/store/slices/authSlices';
 
 const Editor = () => {
   const navigate = useNavigate();
+  const isUser = useSelector(selectIsUser);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    const expirationTimeToken = localStorage.getItem('expirationTimeToken');
-
-    if (
-      !token ||
-      !expirationTimeToken ||
-      new Date().getTime() >= parseInt(expirationTimeToken, 10)
-    ) {
-      localStorage.removeItem('email');
-      localStorage.removeItem('token');
-      localStorage.removeItem('expirationTimeToken');
+    if (!isUser) {
       navigate('/', { replace: true });
     }
   }, []);

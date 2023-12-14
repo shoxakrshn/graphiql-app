@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import 'firebase/auth';
@@ -14,6 +15,7 @@ import Input from '../../shared/ui/Input';
 import { eButtonType } from '../../shared/utils/data';
 import { userSchema } from '../../shared/utils/validation';
 import { auth } from '../../app/firebase/firebaseConfig';
+import { selectIsUser } from '../../app/store/slices/authSlices';
 import loginImg from '../../app/assets/icons/login.svg';
 import styles from './SignIn.module.scss';
 
@@ -33,25 +35,25 @@ export const SignIn: React.FC = () => {
   });
 
   const navigate = useNavigate();
+  const isUser = useSelector(selectIsUser);
 
   const onSubmitHandler = async (values: UserType) => {
     try {
       const { email, password } = values;
-      //const auth = getAuth(app);
 
-      //const userCredential =
       await signInWithEmailAndPassword(auth, email, password);
-      //const user = JSON.parse(JSON.stringify(userCredential.user));
-      //localStorage.setItem('email', email);
-      //localStorage.setItem('token', user.stsTokenManager.accessToken);
-      //localStorage.setItem('expirationTimeToken', user.stsTokenManager.expirationTime);
+
       navigate('/');
     } catch (error) {
       toast.error(t('error-sing-in'));
     }
   };
 
-  useEffect(() => {}, [auth]);
+  useEffect(() => {
+    if (isUser) {
+      navigate('/', { replace: true });
+    }
+  }, []);
 
   return (
     <div className={styles.wrapper}>
