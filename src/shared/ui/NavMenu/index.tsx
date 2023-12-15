@@ -34,6 +34,12 @@ export const NavMenu: React.FC<PropsType> = ({ userStatus, layout, email }) => {
       {userStatus && <h3>{email}</h3>}
 
       {userStatus ? (
+        <AppLink to={'/'} typeButton={eButtonType.Outlined}>
+          {t('main-page')}
+        </AppLink>
+      ) : null}
+
+      {userStatus ? (
         <Button
           text={t('log-out')}
           onClick={handleSignOut}
