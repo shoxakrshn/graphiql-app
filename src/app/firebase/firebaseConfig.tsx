@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
+import { User, getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDzr0HMReo_LXKhkQJAeqy6n8k81xOzlos',
@@ -14,3 +14,20 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
+
+export const getUserInfo = async (email: string) => {
+  const user: User | null = auth.currentUser;
+
+  if (user) {
+    const idTokenResult = await user.getIdTokenResult();
+    const expirationTime = idTokenResult.expirationTime;
+
+    return {
+      isUser: true,
+      email: email,
+      expirationTimeToken: expirationTime,
+    };
+  }
+
+  return null;
+};
