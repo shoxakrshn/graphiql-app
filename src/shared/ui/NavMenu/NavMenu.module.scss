@@ -1,7 +1,8 @@
 .desktop {
   @apply hidden lg:flex space-x-4 items-center;
+  width: 600px;
 }
 
 .mobile {
-  @apply lg:hidden flex p-2 flex-col;
+  @apply lg:hidden flex p-2 flex-col w-full;
 }

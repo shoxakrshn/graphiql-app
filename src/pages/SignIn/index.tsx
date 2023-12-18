@@ -57,7 +57,7 @@ export const SignIn: React.FC = () => {
 
   return (
     <div className={styles.wrapper}>
-      <h1>{t('sign-in')}</h1>
+      <h1 className={styles.title}>{t('sign-in')}</h1>
       <div className={styles.content}>
         <div className={styles.loginIcon}>
           <img src={loginImg} alt="Login" className={styles.icon} />
