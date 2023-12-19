@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 import { Burger, NavMenu } from '../../shared/ui';
 import { StoreProvider } from '../../app/store/StoreProvider';
@@ -43,6 +43,7 @@ export const Header = () => {
   const handleSignOut = async () => {
     try {
       await auth.signOut();
+      toast.success(t('success-sing-out'));
       dispatch(cleanAuth());
       navigate('/');
     } catch (error) {
@@ -89,6 +90,7 @@ export const Header = () => {
           </Burger>
         </div>
       </header>
+      <ToastContainer />
     </StoreProvider>
   );
 };

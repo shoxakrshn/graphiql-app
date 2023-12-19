@@ -22,6 +22,7 @@ export const NavMenu: React.FC<PropsType> = ({ userStatus, layout, email }) => {
   const handleSignOut = async () => {
     try {
       await auth.signOut();
+      toast.success(t('success-sing-out'));
       dispatch(cleanAuth());
     } catch (error) {
       toast.error(t('error-sing-out'));
@@ -30,7 +31,6 @@ export const NavMenu: React.FC<PropsType> = ({ userStatus, layout, email }) => {
 
   return (
     <div className={styles[layout]}>
-      <LanguageToggler />
       {userStatus && <h3 className={styles.email}>{email}</h3>}
 
       {userStatus ? (
@@ -55,6 +55,8 @@ export const NavMenu: React.FC<PropsType> = ({ userStatus, layout, email }) => {
       <AppLink to={userStatus ? '/editor' : '/signup'} typeButton={eButtonType.Outlined}>
         {userStatus ? t('graphiql') : t('sign-up')}
       </AppLink>
+
+      <LanguageToggler />
 
       <ToastContainer />
     </div>

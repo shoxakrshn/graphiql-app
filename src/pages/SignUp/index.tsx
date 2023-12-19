@@ -4,9 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { toast, ToastContainer } from 'react-toastify';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { toast } from 'react-toastify';
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { auth, getUserInfo } from '../../app/firebase/firebaseConfig';
 import { useLanguage } from '../../app/context/localizationContext/LocalizationContext';
@@ -43,6 +42,7 @@ export const SignUp: React.FC = () => {
       const userInfo = await getUserInfo(email);
 
       if (userInfo) {
+        toast.success(t('success-sing-up'));
         dispatch(createAuth(userInfo));
         navigate('/');
       }
