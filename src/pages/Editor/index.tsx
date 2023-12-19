@@ -9,9 +9,15 @@ import { selectIsUser } from '../../app/store/slices/authSlices';
 import { HeadersEditor, QueryEditor, ResultPanel, VariableEditor } from '../../shared/ui';
 import { getSchema } from '../../shared/utils/getSchema';
 import styles from './Editor.module.scss';
+import { getAPI } from '../../shared/utils/getApi';
 
 const Editor = () => {
   const [tab, setTab] = useState<'variables' | 'headers'>('variables');
+  const [query, setQuery] = useState<string>('');
+  const [variables, setVariables] = useState<string>('');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [headers, setHeaders] = useState<string>('');
+  const [response, setResponse] = useState<string>('');
 
   const navigate = useNavigate();
   const isUser = useSelector(selectIsUser);
@@ -23,7 +29,7 @@ const Editor = () => {
   }, []);
 
   useEffect(() => {
-    getSchema('https://api.disneyapi.dev/graphql');
+    getSchema('https://rickandmortyapi.com/graphql');
   }, []);
 
   const onHeaderClickHandler = () => {
@@ -34,15 +40,25 @@ const Editor = () => {
     setTab('variables');
   };
 
+  const onPlayHandler = async () => {
+    const request = await getAPI(
+      'https://rickandmortyapi.com/graphql',
+      query,
+      variables && JSON.parse(variables),
+      headers && JSON.parse(headers),
+    );
+    setResponse(JSON.stringify(request));
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.rightColumn}>
         <PanelGroup direction="vertical">
           <Panel defaultSize={80}>
             <div className="h-full relative">
-              <QueryEditor />
+              <QueryEditor setQuery={setQuery} />
               <div className={styles.buttonsContainer}>
-                <button className="h-10 w-10 rounded-xl bg-fuchsia-500 p-2">
+                <button onClick={onPlayHandler} className="h-10 w-10 rounded-xl bg-fuchsia-500 p-2">
                   <Play className="fill-white" />
                 </button>
                 <button className="h-10 w-10 rounded-xl bg-fuchsia-500 p-2">
@@ -72,12 +88,16 @@ const Editor = () => {
             </div>
           </PanelResizeHandle>
           <Panel defaultSize={20}>
-            {tab === 'variables' ? <VariableEditor /> : <HeadersEditor />}
+            {tab === 'variables' ? (
+              <VariableEditor setVariables={setVariables} value={variables} />
+            ) : (
+              <HeadersEditor setHeaders={setHeaders} value={headers} />
+            )}
           </Panel>
         </PanelGroup>
       </div>
       <div className={styles.leftColumn}>
-        <ResultPanel />
+        <ResultPanel repsonse={response} />
       </div>
     </div>
   );
