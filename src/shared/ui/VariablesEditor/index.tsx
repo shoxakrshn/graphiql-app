@@ -5,20 +5,17 @@ import { langs } from '@uiw/codemirror-extensions-langs';
 const options = {
   settings: {
     fontFamily: 'FiraCode',
-    lineHighlight: '#FFFFFF',
-    background: '#FFFFFF',
-    gutterBackground: '#FFFFFF',
+    lineHighlight: '#FAFAFA',
+    background: '#FAFAFA',
+    gutterBackground: '#FAFAFA',
   },
 };
 
-export const ResultPanel = () => {
+export const VariableEditor = () => {
+  //  const [value, setValue] = useState<string>();
+
   return (
     <CodeMirror
-      basicSetup={{
-        lineNumbers: false,
-        rectangularSelection: false,
-      }}
-      readOnly
       height="100%"
       className="h-full"
       theme={materialLightInit(options)}

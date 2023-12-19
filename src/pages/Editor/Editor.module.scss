@@ -1,0 +1,30 @@
+.container {
+  @apply flex gap-4;
+  height: 100%;
+}
+
+.rightColumn,
+.leftColumn {
+  @apply w-6/12 h-full;
+}
+
+.rightColumn {
+  @apply rounded-lg shadow-md overflow-hidden;
+}
+
+.editorsContainer {
+  @apply h-full;
+}
+
+.tab {
+  @apply inline-block cursor-pointer rounded-md px-3 py-1;
+}
+
+.tabActive {
+  background-color: var(--color-primary);
+  color: var(--color-basic);
+}
+
+.buttonsContainer {
+  @apply w-10 space-y-2 absolute right-2.5 top-2.5;
+}

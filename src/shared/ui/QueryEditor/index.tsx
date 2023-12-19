@@ -16,7 +16,8 @@ export const QueryEditor = () => {
 
   return (
     <CodeMirror
-      height="500px"
+      height="100%"
+      className="h-full"
       theme={materialLightInit(options)}
       // extensions={[javascript({ jsx: true, typescript: true }), tsxLanguage, autoCloseTags]}
       extensions={[langs.tsx()]}
