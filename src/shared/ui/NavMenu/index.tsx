@@ -31,7 +31,7 @@ export const NavMenu: React.FC<PropsType> = ({ userStatus, layout, email }) => {
   return (
     <div className={styles[layout]}>
       <LanguageToggler />
-      {userStatus && <h3>{email}</h3>}
+      {userStatus && <h3 className={styles.email}>{email}</h3>}
 
       {userStatus ? (
         <AppLink to={'/'} typeButton={eButtonType.Outlined}>
