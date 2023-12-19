@@ -11,9 +11,14 @@ const options = {
   },
 };
 
-export const ResultPanel = () => {
+type PropsType = {
+  repsonse: string;
+};
+
+export const ResultPanel = ({ repsonse }: PropsType) => {
   return (
     <CodeMirror
+      value={repsonse}
       basicSetup={{
         lineNumbers: false,
         rectangularSelection: false,
@@ -23,7 +28,7 @@ export const ResultPanel = () => {
       className="h-full"
       theme={materialLightInit(options)}
       // extensions={[javascript({ jsx: true, typescript: true }), tsxLanguage, autoCloseTags]}
-      extensions={[langs.tsx()]}
+      extensions={[langs.json()]}
     />
   );
 };
