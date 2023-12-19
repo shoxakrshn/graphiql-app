@@ -15,5 +15,9 @@
   "welcome-header": "GRAPHIQL",
   "welcome-subheader": "Application for your queries",
   "welcome-info": "To use the application, sign up or sign in to your account",
-  "welcome-start": "Get started"
+  "welcome-start": "Get started",
+  "error-sing-up": "You entered your email or password incorrectly. Please double check!",
+  "error-sing-in": "This email is already in the database!",
+  "error-sing-out": "Error with database!",
+  "main-page": "Main Page"
 }

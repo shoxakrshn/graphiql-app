@@ -1,13 +1,20 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import authReducer, { checkAuth } from './slices/authSlices';
 
-const rootReducer = combineReducers({});
+const rootReducer = combineReducers({
+  auth: authReducer,
+});
 
 export function setupStore(preloadedState?: RootState) {
-  return configureStore({
+  const store = configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
     preloadedState,
   });
+
+  store.dispatch(checkAuth());
+
+  return store;
 }
 
 export type AppStore = ReturnType<typeof setupStore>;

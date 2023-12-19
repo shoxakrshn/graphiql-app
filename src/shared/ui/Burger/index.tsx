@@ -8,18 +8,20 @@ export const Burger: React.FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <div className={styles.mobileMenu}>
-      {menuOpen ? (
-        <>
-          <button className={styles.closeButton} onClick={() => setMenuOpen(false)}>
-            <img src={close} alt="Close Menu" />
+      <div className={menuOpen ? `${styles.menuOpen}` : styles.menuClose}>
+        {menuOpen ? (
+          <>
+            <button className={styles.closeButton} onClick={() => setMenuOpen(false)}>
+              <img src={close} alt="Close Menu" />
+            </button>
+            {children}
+          </>
+        ) : (
+          <button className={styles.menuButton} onClick={() => setMenuOpen(true)}>
+            <img src={burger} alt="Open Menu" />
           </button>
-          {children}
-        </>
-      ) : (
-        <button className={styles.menuButton} onClick={() => setMenuOpen(true)}>
-          <img src={burger} alt="Open Menu" />
-        </button>
-      )}
+        )}
+      </div>
     </div>
   );
 };

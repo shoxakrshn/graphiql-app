@@ -1,9 +1,9 @@
 .wrapper {
   @apply flex justify-center flex-wrap;
+}
 
-  h1 {
-    @include font-style($font-sans, $font-size-5xl, var(--color-accent), 600);
-  }
+.title {
+  @include font-style($font-sans, $font-size-5xl, var(--color-accent), 600);
 }
 
 .content {
@@ -31,6 +31,7 @@
   }
 
   .blockForm {
+    padding: 20px 0;
     width: 350px;
   }
 }
