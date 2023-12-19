@@ -28,7 +28,6 @@ export const HeadersEditor = ({ setHeaders, value }: PropsType) => {
       height="100%"
       className="h-full"
       theme={materialLightInit(options)}
-      // extensions={[javascript({ jsx: true, typescript: true }), tsxLanguage, autoCloseTags]}
       extensions={[langs.json()]}
       onChange={onChange}
     />

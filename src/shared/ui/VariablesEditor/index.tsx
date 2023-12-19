@@ -28,7 +28,6 @@ export const VariableEditor = ({ setVariables, value }: PropsType) => {
       value={value}
       className="h-full"
       theme={materialLightInit(options)}
-      // extensions={[javascript({ jsx: true, typescript: true }), tsxLanguage, autoCloseTags]}
       extensions={[langs.json()]}
       onChange={onChange}
     />
