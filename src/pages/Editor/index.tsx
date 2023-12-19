@@ -1,14 +1,26 @@
-import { ResultPanel, QueryEditor, HeadersEditor, VariableEditor } from '../../shared/ui';
-import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
-import styles from './Editor.module.scss';
 import cn from 'classnames';
-import { Play } from '../../app/assets/icons/Play';
-import { Document } from '../../app/assets/icons/Document';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
+import { useNavigate } from 'react-router-dom';
+import { Document } from '../../app/assets/icons/Document';
+import { Play } from '../../app/assets/icons/Play';
+import { selectIsUser } from '../../app/store/slices/authSlices';
+import { HeadersEditor, QueryEditor, ResultPanel, VariableEditor } from '../../shared/ui';
 import { getSchema } from '../../shared/utils/getSchema';
+import styles from './Editor.module.scss';
 
 const Editor = () => {
   const [tab, setTab] = useState<'variables' | 'headers'>('variables');
+
+  const navigate = useNavigate();
+  const isUser = useSelector(selectIsUser);
+
+  useEffect(() => {
+    if (!isUser) {
+      navigate('/', { replace: true });
+    }
+  }, []);
 
   useEffect(() => {
     getSchema('https://api.disneyapi.dev/graphql');
