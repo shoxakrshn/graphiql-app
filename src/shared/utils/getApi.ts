@@ -1,21 +1,18 @@
-export const getAPI = async (url: string) => {
+export const getAPI = async (
+  url: string,
+  query: string,
+  variables?: string,
+  headers?: { [x: string]: string },
+) => {
   const result = await fetch(url, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    //headers: { 'Content-Type': 'application/json' },
+    headers: headers || { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      query: `
-         query AllCharacters {
-          characters {
-            results {
-              id
-              name
-              status
-            }
-          }
-        }
-        `,
+      query,
+      variables,
     }),
   });
 
-  console.log(result);
+  return await result.json();
 };
