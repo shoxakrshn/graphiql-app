@@ -10,5 +10,5 @@ export const getSchema = async (url: string) => {
     }),
   });
 
-  console.log(await result.json());
+  return await result.json();
 };
