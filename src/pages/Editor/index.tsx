@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
 import { useNavigate } from 'react-router-dom';
@@ -15,9 +15,9 @@ const Editor = () => {
   const [tab, setTab] = useState<'variables' | 'headers'>('variables');
   const [query, setQuery] = useState<string>('');
   const [variables, setVariables] = useState<string>('');
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [headers, setHeaders] = useState<string>('');
   const [response, setResponse] = useState<string>('');
+  const [url, setUrl] = useState<string>('https://rickandmortyapi.com/graphql');
 
   const navigate = useNavigate();
   const isUser = useSelector(selectIsUser);
@@ -29,26 +29,33 @@ const Editor = () => {
   }, []);
 
   useEffect(() => {
-    getSchema('https://rickandmortyapi.com/graphql');
+    getSchema(url);
   }, []);
 
-  const onHeaderClickHandler = () => {
+  const onHeaderClickHandler = useCallback(() => {
     setTab('headers');
-  };
+  }, [tab]);
 
-  const onVariablesClickHandler = () => {
+  const onVariablesClickHandler = useCallback(() => {
     setTab('variables');
-  };
+  }, [tab]);
 
   const onPlayHandler = async () => {
     const request = await getAPI(
-      'https://rickandmortyapi.com/graphql',
+      url,
       query,
       variables && JSON.parse(variables),
       headers && JSON.parse(headers),
     );
     setResponse(JSON.stringify(request));
   };
+
+  const onUrlChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      setUrl(e.target.value);
+    },
+    [url],
+  );
 
   return (
     <div className={styles.container}>
@@ -58,17 +65,17 @@ const Editor = () => {
             <div className="h-full relative">
               <QueryEditor setQuery={setQuery} />
               <div className={styles.buttonsContainer}>
-                <button onClick={onPlayHandler} className="h-10 w-10 rounded-xl bg-fuchsia-500 p-2">
+                <button onClick={onPlayHandler} className={styles.sideButtons}>
                   <Play className="fill-white" />
                 </button>
-                <button className="h-10 w-10 rounded-xl bg-fuchsia-500 p-2">
+                <button className={styles.sideButtons}>
                   <Document />
                 </button>
               </div>
             </div>
           </Panel>
-          <PanelResizeHandle className={'flex justify-between border-t-2 p-2'}>
-            <div className="flex cursor-default space-x-2 text-deepsea transition-all dark:text-sky">
+          <PanelResizeHandle className={styles.pageResize}>
+            <div className="flex items-center gap-2">
               <span
                 onClick={onVariablesClickHandler}
                 className={cn(styles.tab, {
@@ -86,6 +93,17 @@ const Editor = () => {
                 headers
               </span>
             </div>
+            <label htmlFor="url" className={styles.urlLabel}>
+              <input
+                value={url}
+                onChange={onUrlChange}
+                type="text"
+                placeholder="URL"
+                className={styles.urlInput}
+                name="url"
+                id="url"
+              />
+            </label>
           </PanelResizeHandle>
           <Panel defaultSize={20}>
             {tab === 'variables' ? (
