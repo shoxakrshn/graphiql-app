@@ -6,8 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import 'firebase/auth';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { toast } from 'react-toastify';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useLanguage } from '../../app/context/localizationContext/LocalizationContext';
 import { Button } from '../../shared/ui';
@@ -41,6 +40,7 @@ export const SignIn: React.FC = () => {
       await signInWithEmailAndPassword(auth, email, password);
       const userInfo = await getUserInfo(email);
       if (userInfo) {
+        toast.success(t('success-sing-in'));
         dispatch(createAuth(userInfo));
         navigate('/');
       }

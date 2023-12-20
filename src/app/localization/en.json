@@ -19,5 +19,8 @@
   "error-sing-up": "You entered your email or password incorrectly. Please double check!",
   "error-sing-in": "This email is already in the database!",
   "error-sing-out": "Error with database!",
-  "main-page": "Main Page"
+  "main-page": "Main Page",
+  "success-sing-up": "You have successfully registered!",
+  "success-sing-in": "You have successfully logged into the application!",
+  "success-sing-out": "You have left the application."
 }
