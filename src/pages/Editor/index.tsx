@@ -8,8 +8,10 @@ import { Play } from '../../app/assets/icons/Play';
 import { selectIsUser } from '../../app/store/slices/authSlices';
 import { HeadersEditor, QueryEditor, ResultPanel, VariableEditor } from '../../shared/ui';
 import { getSchema } from '../../shared/utils/getSchema';
-import styles from './Editor.module.scss';
 import { getAPI } from '../../shared/utils/getApi';
+import { convertToPrettier } from '../../shared/utils/functions';
+import { AppPrettier } from '../../app/assets/icons/AppPrettier';
+import styles from './Editor.module.scss';
 
 const Editor = () => {
   const [tab, setTab] = useState<'variables' | 'headers'>('variables');
@@ -18,6 +20,7 @@ const Editor = () => {
   const [headers, setHeaders] = useState<string>('');
   const [response, setResponse] = useState<string>('');
   const [url, setUrl] = useState<string>('https://rickandmortyapi.com/graphql');
+  const [formattedQuery, setFormattedQuery] = useState<string>('');
 
   const navigate = useNavigate();
   const isUser = useSelector(selectIsUser);
@@ -47,7 +50,7 @@ const Editor = () => {
       variables && JSON.parse(variables),
       headers && JSON.parse(headers),
     );
-    setResponse(JSON.stringify(request));
+    setResponse(convertToPrettier(JSON.stringify(request)));
   };
 
   const onUrlChange = useCallback(
@@ -57,19 +60,29 @@ const Editor = () => {
     [url],
   );
 
+  const onPrettierClickHandler = () => {
+    setResponse(convertToPrettier(response));
+    setFormattedQuery(convertToPrettier(query));
+    setVariables(convertToPrettier(variables));
+    setHeaders(convertToPrettier(headers));
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.rightColumn}>
         <PanelGroup direction="vertical">
           <Panel defaultSize={80}>
             <div className="h-full relative">
-              <QueryEditor setQuery={setQuery} />
+              <QueryEditor setQuery={setQuery} formattedQuery={formattedQuery} />
               <div className={styles.buttonsContainer}>
                 <button onClick={onPlayHandler} className={styles.sideButtons}>
                   <Play className="fill-white" />
                 </button>
                 <button className={styles.sideButtons}>
                   <Document />
+                </button>
+                <button onClick={onPrettierClickHandler} className={styles.sideButtons}>
+                  <AppPrettier />
                 </button>
               </div>
             </div>

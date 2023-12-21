@@ -14,9 +14,10 @@ const options = {
 
 type PropsType = {
   setQuery: Dispatch<React.SetStateAction<string>>;
+  formattedQuery: string;
 };
 
-export const QueryEditor = ({ setQuery }: PropsType) => {
+export const QueryEditor = ({ setQuery, formattedQuery }: PropsType) => {
   const onChange = useCallback((val: string) => {
     setQuery(val);
   }, []);
@@ -25,6 +26,7 @@ export const QueryEditor = ({ setQuery }: PropsType) => {
     <CodeMirror
       height="100%"
       className="h-full"
+      value={formattedQuery}
       theme={materialLightInit(options)}
       extensions={[langs.json()]}
       onChange={onChange}
