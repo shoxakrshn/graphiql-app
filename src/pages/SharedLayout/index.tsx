@@ -6,7 +6,10 @@ const SharedLayout = () => {
   return (
     <StoreProvider>
       <Header />
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
+
       <Footer />
     </StoreProvider>
   );
