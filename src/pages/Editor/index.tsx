@@ -20,7 +20,6 @@ const Editor = () => {
   const [headers, setHeaders] = useState<string>('');
   const [response, setResponse] = useState<string>('');
   const [url, setUrl] = useState<string>('https://rickandmortyapi.com/graphql');
-  const [formattedQuery, setFormattedQuery] = useState<string>('');
 
   const navigate = useNavigate();
   const isUser = useSelector(selectIsUser);
@@ -61,8 +60,7 @@ const Editor = () => {
   );
 
   const onPrettierClickHandler = () => {
-    setResponse(convertToPrettier(response));
-    setFormattedQuery(convertToPrettier(query));
+    setQuery(convertToPrettier(query));
     setVariables(convertToPrettier(variables));
     setHeaders(convertToPrettier(headers));
   };
@@ -73,7 +71,7 @@ const Editor = () => {
         <PanelGroup direction="vertical">
           <Panel defaultSize={80}>
             <div className="h-full relative">
-              <QueryEditor setQuery={setQuery} formattedQuery={formattedQuery} />
+              <QueryEditor setQuery={setQuery} formattedQuery={query} />
               <div className={styles.buttonsContainer}>
                 <button onClick={onPlayHandler} className={styles.sideButtons}>
                   <Play className="fill-white" />
