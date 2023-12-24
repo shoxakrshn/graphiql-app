@@ -46,7 +46,14 @@
 }
 
 .teamMember {
-  @apply my-1;
+  @apply my-4 flex items-center;
+}
+
+.avatar {
+  @apply mx-2;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
 }
 
 @media screen and (max-width: 768px) {

@@ -3,6 +3,9 @@ import loginImg from '../../app/assets/icons/welcome.svg';
 import styles from './Main.module.scss';
 import { Button } from '../../shared/ui';
 import { eButtonType } from '../../shared/utils/data';
+import shoha from '../../app/assets/images/shoha.png';
+import liza from '../../app/assets/images/liza.jpeg';
+import shahzod from '../../app/assets/images/shahzod.jpeg';
 
 const Main = () => {
   const { t } = useLanguage();
@@ -19,16 +22,25 @@ const Main = () => {
           <Button text={t('welcome-start')} typeButton={eButtonType.Filled} />
           <div className={styles.team}>
             <div className={styles.teamMember}>
-              <h4>Shoha</h4>
-              <p>Team-Lead, Frontend Developer</p>
+              <img src={shoha} className={styles.avatar} />
+              <span>
+                <h4>Shoha</h4>
+                <p>Team-Lead, Frontend Developer</p>
+              </span>
             </div>
             <div className={styles.teamMember}>
-              <h4>Liza</h4>
-              <p>Frontend Developer, Designer</p>
+              <img src={liza} className={styles.avatar} />
+              <span>
+                <h4>Liza</h4>
+                <p>Frontend Developer, Designer</p>
+              </span>
             </div>
             <div className={styles.teamMember}>
-              <h4>Shahzod</h4>
-              <p>Frontend Developer, Tech-Lead</p>
+              <img src={shahzod} className={styles.avatar} />
+              <span>
+                <h4>Shahzod</h4>
+                <p>Frontend Developer, Tech-Lead</p>
+              </span>
             </div>
           </div>
         </div>
