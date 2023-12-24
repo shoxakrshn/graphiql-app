@@ -1,5 +1,5 @@
 %button {
-  @apply w-full rounded-[20px] p-1;
+  @apply w-full rounded-[20px] p-2 whitespace-nowrap;
 }
 
 .filled {
@@ -19,7 +19,7 @@
   border: 2px solid var(--color-primary);
 
   &:hover {
-    background-color: var(--color-primary);
+    background-color: var(--color-primary) !important;
     color: white;
   }
 }
