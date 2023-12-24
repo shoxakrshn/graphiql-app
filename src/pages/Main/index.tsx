@@ -24,21 +24,27 @@ const Main = () => {
             <div className={styles.teamMember}>
               <img src={shoha} className={styles.avatar} />
               <span>
-                <h4>Shoha</h4>
+                <h4 className={styles.name}>
+                  <a href="https://github.com/shoxakrshn">Shoha</a>
+                </h4>
                 <p>Team-Lead, Frontend Developer</p>
               </span>
             </div>
             <div className={styles.teamMember}>
               <img src={liza} className={styles.avatar} />
               <span>
-                <h4>Liza</h4>
+                <h4 className={styles.name}>
+                  <a href="https://github.com/LizavetaNik">Liza</a>
+                </h4>
                 <p>Frontend Developer, Designer</p>
               </span>
             </div>
             <div className={styles.teamMember}>
               <img src={shahzod} className={styles.avatar} />
               <span>
-                <h4>Shahzod</h4>
+                <h4 className={styles.name}>
+                  <a href="https://github.com/shahzod222">Shahzod</a>
+                </h4>
                 <p>Frontend Developer, Tech-Lead</p>
               </span>
             </div>
