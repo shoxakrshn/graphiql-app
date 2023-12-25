@@ -60,9 +60,9 @@ const Editor = () => {
   );
 
   const onPrettierClickHandler = () => {
-    setQuery(convertToPrettier(query));
-    setVariables(convertToPrettier(variables));
-    setHeaders(convertToPrettier(headers));
+    setQuery((prevQuery) => convertToPrettier(prevQuery));
+    setVariables((prevVariables) => convertToPrettier(prevVariables));
+    setHeaders((prevHeaders) => convertToPrettier(prevHeaders));
   };
 
   return (

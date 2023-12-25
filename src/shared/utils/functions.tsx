@@ -12,6 +12,7 @@ export function convertToPrettier(file: string): string {
 
   return file;
 }
+
 function formatGraphQL(query: string): string {
   try {
     const parsedQuery: DocumentNode = parse(query, { noLocation: true });
