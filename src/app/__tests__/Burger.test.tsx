@@ -1,7 +1,7 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { Burger } from '../src/shared/ui/Burger/index';
+import { Burger } from '../../shared/ui/Burger/index';
 import { test, expect } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 

@@ -1,6 +1,6 @@
 import { render, fireEvent } from '@testing-library/react';
-import LocalizationProvider from '../src/app/context/localizationContext/LocalizationProvider';
-import { SignUp } from '../src/pages/SignUp/index';
+import LocalizationProvider from '../../app/context/localizationContext/LocalizationProvider';
+import { SignUp } from '../../pages/SignUp/index';
 import { test, expect } from 'vitest';
 import React from 'react';
 import { Provider } from 'react-redux';

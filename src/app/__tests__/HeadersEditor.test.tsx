@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { HeadersEditor } from '../src/shared/ui/HeadersEditor/index';
+import { HeadersEditor } from '../../shared/ui/HeadersEditor/index';
 import { test, expect } from 'vitest';
 
 test('HeadersEditor Component', () => {

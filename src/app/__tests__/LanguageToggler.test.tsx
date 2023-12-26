@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { LanguageToggler } from '../src/shared/ui/LanguageToggler/index';
+import { LanguageToggler } from '../../shared/ui/LanguageToggler/index';
 import { test, expect } from 'vitest';
-import LocalizationProvider from '../src/app/context/localizationContext/LocalizationProvider';
+import LocalizationProvider from '../context/localizationContext/LocalizationProvider';
 
 const mockLocalizationProvider = ({ children }) => (
   <LocalizationProvider>{children}</LocalizationProvider>

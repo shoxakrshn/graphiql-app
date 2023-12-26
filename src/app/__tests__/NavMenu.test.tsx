@@ -1,10 +1,10 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { NavMenu } from '../src/shared/ui/NavMenu/index';
+import { NavMenu } from '../../shared/ui/NavMenu/index';
 import { test, expect } from 'vitest';
 import { act } from 'react-dom/test-utils';
-import LocalizationProvider from '../src/app/context/localizationContext/LocalizationProvider';
+import LocalizationProvider from '../../app/context/localizationContext/LocalizationProvider';
 import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';

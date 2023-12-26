@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { AppLink } from '../src/shared/ui/AppLink/index';
-import { eButtonType } from '../src/shared/utils/data';
+import { AppLink } from '../../shared/ui/AppLink/index';
+import { eButtonType } from '../../shared/utils/data';
 import { test, expect } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 import React from 'react';

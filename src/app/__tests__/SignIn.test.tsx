@@ -1,10 +1,10 @@
 import { render, fireEvent, waitFor } from '@testing-library/react';
-import LocalizationProvider from '../src/app/context/localizationContext/LocalizationProvider';
+import LocalizationProvider from '../../app/context/localizationContext/LocalizationProvider';
 import { test, expect } from 'vitest';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { MemoryRouter } from 'react-router-dom';
-import { SignIn } from '../src/pages/SignIn/index';
+import { SignIn } from '../../pages/SignIn/index';
 import configureMockStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 
