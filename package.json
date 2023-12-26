@@ -12,7 +12,7 @@
     "prettier": "prettier --config .prettierrc \"./**/*.{ts,tsx,json,scss}\" --write",
     "eslint": "eslint --ext . \"./**/*.{ts,tsx}\" --fix",
     "test": "vitest",
-    "coverage": "vitest run --coverage --reporter",
+    "coverage": "vitest run --coverage",
     "prepare": "husky install"
   },
   "dependencies": {
