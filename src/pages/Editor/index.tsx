@@ -58,7 +58,7 @@ const Editor = () => {
   );
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="editor-page">
       <div className={styles.rightColumn}>
         <PanelGroup direction="vertical">
           <Panel defaultSize={80}>
