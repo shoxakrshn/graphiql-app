@@ -1,26 +1,38 @@
 import cn from 'classnames';
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
+import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
+import {
+  ImperativePanelHandle,
+  Panel,
+  PanelGroup,
+  PanelResizeHandle,
+} from 'react-resizable-panels';
 import { useNavigate } from 'react-router-dom';
 import { Document } from '../../app/assets/icons/Document';
 import { Play } from '../../app/assets/icons/Play';
+import { ChevronUp } from '../../app/assets/icons/chevronUp';
+import { ChevronDown } from '../../app/assets/icons/chevronDown';
 import { selectIsUser } from '../../app/store/slices/authSlices';
 import { HeadersEditor, QueryEditor, ResultPanel, VariableEditor } from '../../shared/ui';
 import { getSchema } from '../../shared/utils/getSchema';
 import styles from './Editor.module.scss';
 import { getAPI } from '../../shared/utils/getApi';
+import { useAppSelector } from '../../app/store/hooks/hooks';
+
+type TabType = 'variables' | 'headers';
 
 const Editor = () => {
-  const [tab, setTab] = useState<'variables' | 'headers'>('variables');
+  const [tab, setTab] = useState<TabType>('variables');
   const [query, setQuery] = useState<string>('');
   const [variables, setVariables] = useState<string>('');
   const [headers, setHeaders] = useState<string>('');
   const [response, setResponse] = useState<string>('');
   const [url, setUrl] = useState<string>('https://rickandmortyapi.com/graphql');
 
+  const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
+  const panelRef = useRef<ImperativePanelHandle>(null);
+
   const navigate = useNavigate();
-  const isUser = useSelector(selectIsUser);
+  const isUser = useAppSelector(selectIsUser);
 
   useEffect(() => {
     if (!isUser) {
@@ -32,13 +44,19 @@ const Editor = () => {
     getSchema(url);
   }, []);
 
-  const onHeaderClickHandler = useCallback(() => {
-    setTab('headers');
-  }, [tab]);
+  const onChevronHandler = useCallback(() => {
+    panelRef.current?.isExpanded() ? panelRef.current.collapse() : panelRef.current?.expand();
+    setIsCollapsed((prev) => !prev);
+  }, []);
 
-  const onVariablesClickHandler = useCallback(() => {
-    setTab('variables');
-  }, [tab]);
+  const onTabHandler = useCallback(
+    (activeTab: TabType) => {
+      setTab(activeTab);
+      setIsCollapsed(false);
+      panelRef.current?.isCollapsed && panelRef.current.expand();
+    },
+    [tab],
+  );
 
   const onPlayHandler = async () => {
     const request = await getAPI(
@@ -61,7 +79,7 @@ const Editor = () => {
     <div className={styles.container}>
       <div className={styles.rightColumn}>
         <PanelGroup direction="vertical">
-          <Panel defaultSize={80}>
+          <Panel defaultSize={100}>
             <div className="h-full relative">
               <QueryEditor setQuery={setQuery} />
               <div className={styles.buttonsContainer}>
@@ -77,7 +95,7 @@ const Editor = () => {
           <PanelResizeHandle className={styles.pageResize}>
             <div className="flex items-center gap-2">
               <span
-                onClick={onVariablesClickHandler}
+                onClick={() => onTabHandler('variables')}
                 className={cn(styles.tab, {
                   [styles.tabActive]: tab === 'variables',
                 })}
@@ -85,7 +103,7 @@ const Editor = () => {
                 variables
               </span>
               <span
-                onClick={onHeaderClickHandler}
+                onClick={() => onTabHandler('headers')}
                 className={cn(styles.tab, {
                   [styles.tabActive]: tab === 'headers',
                 })}
@@ -104,8 +122,9 @@ const Editor = () => {
                 id="url"
               />
             </label>
+            <span onClick={onChevronHandler}>{isCollapsed ? <ChevronUp /> : <ChevronDown />}</span>
           </PanelResizeHandle>
-          <Panel defaultSize={20}>
+          <Panel minSize={20} collapsible ref={panelRef}>
             {tab === 'variables' ? (
               <VariableEditor setVariables={setVariables} value={variables} />
             ) : (
