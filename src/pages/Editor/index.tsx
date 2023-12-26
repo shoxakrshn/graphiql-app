@@ -12,7 +12,7 @@ import { Play } from '../../app/assets/icons/Play';
 import { ChevronUp } from '../../app/assets/icons/chevronUp';
 import { ChevronDown } from '../../app/assets/icons/chevronDown';
 import { selectIsUser } from '../../app/store/slices/authSlices';
-import { HeadersEditor, QueryEditor, ResultPanel, VariableEditor } from '../../shared/ui';
+import { HeadersEditor, QueryEditor, VariableEditor } from '../../shared/ui';
 import { getSchema } from '../../shared/utils/getSchema';
 import styles from './Editor.module.scss';
 import { getAPI } from '../../shared/utils/getApi';
@@ -78,7 +78,18 @@ const Editor = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.rightColumn}>
+      <div className={styles.leftColumn}>
+        <label htmlFor="url" className={styles.urlLabel}>
+          <input
+            value={url}
+            onChange={onUrlChange}
+            type="text"
+            placeholder="URL"
+            className={styles.urlInput}
+            name="url"
+            id="url"
+          />
+        </label>
         <div className={styles.editorsContainer}>
           <PanelGroup direction="vertical">
             <Panel defaultSize={100}>
@@ -113,17 +124,6 @@ const Editor = () => {
                   headers
                 </span>
               </div>
-              <label htmlFor="url" className={styles.urlLabel}>
-                <input
-                  value={url}
-                  onChange={onUrlChange}
-                  type="text"
-                  placeholder="URL"
-                  className={styles.urlInput}
-                  name="url"
-                  id="url"
-                />
-              </label>
               <span onClick={onChevronHandler}>
                 {isCollapsed ? <ChevronUp /> : <ChevronDown />}
               </span>
@@ -146,8 +146,8 @@ const Editor = () => {
           </PanelGroup>
         </div>
       </div>
-      <div className={styles.leftColumn}>
-        <ResultPanel repsonse={response} />
+      <div className={styles.rightColumn}>
+        <QueryEditor response={response} readonly />
       </div>
     </div>
   );
