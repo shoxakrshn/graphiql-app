@@ -1,5 +1,5 @@
 %link {
-  @apply w-full text-center whitespace-nowrap;
+  @apply w-full text-center whitespace-nowrap transition-all duration-300 ease-in-out;
   @apply rounded-[20px] p-2;
 }
 
@@ -18,6 +18,7 @@
   background-color: var(--color-basic) !important;
   color: var(--color-primary);
   border: 2px solid var(--color-primary);
+  transition-delay: 200ms;
 
   &:hover {
     background-color: var(--color-primary) !important;
