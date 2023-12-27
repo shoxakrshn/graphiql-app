@@ -8,14 +8,23 @@ import { SignIn } from '../../pages/SignIn/index';
 import configureMockStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 
-const mockStore = configureMockStore();
+type RootState = {
+  auth: {
+    isUser: boolean;
+    userEmail: string;
+    expirationTimeToken: string;
+  };
+};
+
+const mockStore = configureMockStore<RootState>();
 const store = mockStore({
   auth: {
-    isUser: true,
-    userEmail: 'test@example.com',
-    expirationTimeToken: 'password123',
+    isUser: false,
+    userEmail: '',
+    expirationTimeToken: '',
   },
 });
+
 test('renders SignIn component and submits the form successfully', async () => {
   const { getByPlaceholderText, getByRole } = render(
     <Provider store={store}>

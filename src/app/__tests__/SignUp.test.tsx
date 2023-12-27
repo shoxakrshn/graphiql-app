@@ -7,12 +7,20 @@ import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import configureMockStore from 'redux-mock-store';
 
-const mockStore = configureMockStore();
+type RootState = {
+  auth: {
+    isUser: boolean;
+    userEmail: string;
+    expirationTimeToken: string;
+  };
+};
+
+const mockStore = configureMockStore<RootState>();
 const store = mockStore({
   auth: {
-    isUser: true,
-    userEmail: 'test@example.com',
-    expirationTimeToken: 'password123',
+    isUser: false,
+    userEmail: '',
+    expirationTimeToken: '',
   },
 });
 
