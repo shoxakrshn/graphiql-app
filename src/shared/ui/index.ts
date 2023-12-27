@@ -5,6 +5,5 @@ export * from './NavMenu';
 export * from './LanguageToggler';
 export * from './Burger';
 export * from './QueryEditor';
-export * from './ResultPanel';
 export * from './VariablesEditor';
 export * from './HeadersEditor';
