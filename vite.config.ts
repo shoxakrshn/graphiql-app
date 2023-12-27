@@ -16,7 +16,7 @@ export default defineConfig({
       reporter: ['text', 'json', 'html'],
       reportsDirectory: './src/tests/coverage',
       all: true,
-      include: ['src/shared/ui/**/*.tsx', 'src/pages/**/*.tsx'],
+      include: ['src/shared/ui/**/*.tsx', 'src/pages/**/*.tsx', 'src/widgets/**/*.tsx'],
       exclude: ['src/pages/index.tsx', 'src/pages/Editor/index.tsx'],
     },
   },
