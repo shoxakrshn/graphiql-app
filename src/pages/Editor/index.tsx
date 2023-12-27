@@ -9,7 +9,7 @@ import { selectIsUser } from '../../app/store/slices/authSlices';
 import { HeadersEditor, QueryEditor, ResultPanel, VariableEditor } from '../../shared/ui';
 import { getSchema } from '../../shared/utils/getSchema';
 import { getAPI } from '../../shared/utils/getApi';
-import { convertToPrettier } from '../../shared/utils/functions';
+import { convertToPrettier } from '../../shared/utils/prettierApp';
 import { AppPrettier } from '../../app/assets/icons/AppPrettier';
 import styles from './Editor.module.scss';
 
