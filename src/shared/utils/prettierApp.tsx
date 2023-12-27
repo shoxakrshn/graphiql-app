@@ -18,11 +18,6 @@ const workWithQuery = (graphqlQuery: string) => {
     // Delete '{' and '}', leaving spaces and line breaks
     let result = modifiedSubstring.replace(/[{}]/g, '').replace(/\s+/g, ' ').trim();
 
-    // Add a space before '(' and remove a space after '('
-    result = result.replace(/(\S)\(/g, '$1 (').replace(/\(\s+/g, '(');
-    // Remove the space before ')'
-    result = result.replace(/\s*\)/g, ') ');
-
     // If there are no '(' or ')' characters in the line, add a line break after each value except the last one
     if (!result.includes('(') && !result.includes(')')) {
       const values = result.split(/\s+/);
