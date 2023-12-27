@@ -14,8 +14,10 @@ import { ChevronDown } from '../../app/assets/icons/chevronDown';
 import { selectIsUser } from '../../app/store/slices/authSlices';
 import { HeadersEditor, QueryEditor, VariableEditor } from '../../shared/ui';
 import { getSchema } from '../../shared/utils/getSchema';
-import styles from './Editor.module.scss';
 import { getAPI } from '../../shared/utils/getApi';
+import { convertToPrettier } from '../../app/prettier/prettierApp';
+import { AppPrettier } from '../../app/assets/icons/AppPrettier';
+import styles from './Editor.module.scss';
 import { useAppSelector } from '../../app/store/hooks/hooks';
 
 type TabType = 'variables' | 'headers';
@@ -66,7 +68,7 @@ const Editor = () => {
       variables && JSON.parse(variables),
       headers && JSON.parse(headers),
     );
-    setResponse(JSON.stringify(request));
+    setResponse(convertToPrettier(JSON.stringify(request)));
   };
 
   const onUrlChange = useCallback(
@@ -75,6 +77,12 @@ const Editor = () => {
     },
     [url],
   );
+
+  const onPrettierClickHandler = () => {
+    setQuery((prevQuery) => convertToPrettier(prevQuery));
+    setVariables((prevVariables) => convertToPrettier(prevVariables));
+    setHeaders((prevHeaders) => convertToPrettier(prevHeaders));
+  };
 
   return (
     <div className={styles.container}>
@@ -94,13 +102,16 @@ const Editor = () => {
           <PanelGroup direction="vertical">
             <Panel defaultSize={100}>
               <div className="h-full relative">
-                <QueryEditor setQuery={setQuery} />
+                <QueryEditor setQuery={setQuery} response={query} />
                 <div className={styles.buttonsContainer}>
                   <button onClick={onPlayHandler} className={styles.sideButtons}>
                     <Play className="fill-white" />
                   </button>
                   <button className={styles.sideButtons}>
                     <Document />
+                  </button>
+                  <button onClick={onPrettierClickHandler} className={styles.sideButtons}>
+                    <AppPrettier />
                   </button>
                 </div>
               </div>

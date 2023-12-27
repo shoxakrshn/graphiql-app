@@ -14,7 +14,7 @@ const Main = () => {
   const { t } = useLanguage();
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} data-testid="main-page">
       <h1 className={styles.title}>{t('welcome')}</h1>
 
       <div className={styles.container}>

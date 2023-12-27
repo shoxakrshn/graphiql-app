@@ -77,7 +77,10 @@ export const Header = () => {
 
   return (
     <StoreProvider>
-      <header className={`${styles.header} ${isSticky ? styles.scrolled : ''}`}>
+      <header
+        data-testid="header"
+        className={`${styles.header} ${isSticky ? `${styles.scrolled} scrolled` : ''}`}
+      >
         <div className={styles.container}>
           <Link to={'/'}>
             <img src={logo} alt="Logo" />

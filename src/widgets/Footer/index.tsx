@@ -10,16 +10,16 @@ enum eGits {
 
 export const Footer = () => {
   return (
-    <div className={styles.footer}>
+    <div className={styles.footer} data-testid="footer">
       <div className={styles.gitIcons}>
         <a href={`https://github.com/${eGits.liza}`} target="_blank" rel="noreferrer">
-          <img src={gitIcon} />
+          <img src={gitIcon} alt="git-icon" />
         </a>
         <a href={`https://github.com/${eGits.shahzod}`} target="_blank" rel="noreferrer">
-          <img src={gitIcon} />
+          <img src={gitIcon} alt="git-icon" />
         </a>
         <a href={`https://github.com/${eGits.shoha}`} target="_blank" rel="noreferrer">
-          <img src={gitIcon} />
+          <img src={gitIcon} alt="git-icon" />
         </a>
       </div>
 

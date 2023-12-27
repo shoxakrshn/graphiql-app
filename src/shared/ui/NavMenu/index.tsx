@@ -30,7 +30,7 @@ export const NavMenu: React.FC<PropsType> = ({ userStatus, layout, email }) => {
   };
 
   return (
-    <div className={styles[layout]}>
+    <div className={styles[layout]} data-testid="nav-menu">
       {userStatus && <h3 className={styles.email}>{email}</h3>}
 
       {userStatus ? (
