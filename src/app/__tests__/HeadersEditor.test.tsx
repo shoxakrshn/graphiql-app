@@ -5,9 +5,14 @@ import { HeadersEditor } from '../../shared/ui/HeadersEditor/index';
 import { test, expect } from 'vitest';
 
 test('HeadersEditor Component', () => {
-  const setHeadersMock = (val) => {
+  type SetHeadersMockType = React.Dispatch<React.SetStateAction<string>> & {
+    calls: React.SetStateAction<string>[];
+  };
+
+  const setHeadersMock: SetHeadersMockType = (val: React.SetStateAction<string>) => {
     setHeadersMock.calls.push(val);
   };
+
   setHeadersMock.calls = [];
 
   const { container } = render(

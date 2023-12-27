@@ -1,16 +1,33 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { LanguageToggler } from '../../shared/ui/LanguageToggler/index';
 import { test, expect } from 'vitest';
 import LocalizationProvider from '../context/localizationContext/LocalizationProvider';
 
-const mockLocalizationProvider = ({ children }) => (
+type MockLocalizationProviderProps = {
+  children: ReactNode;
+};
+
+type UseLanguageType = {
+  setLanguage: () => void;
+  language: string;
+};
+
+type GlobalWithLocalizationProvider = typeof globalThis & {
+  LocalizationProvider: (props: { children: ReactNode }) => JSX.Element;
+  useLanguage: () => UseLanguageType;
+};
+
+const mockLocalizationProvider = ({ children }: MockLocalizationProviderProps) => (
   <LocalizationProvider>{children}</LocalizationProvider>
 );
 
-globalThis.LocalizationProvider = mockLocalizationProvider;
-globalThis.useLanguage = () => ({ setLanguage: () => {}, language: 'en' });
+(globalThis as GlobalWithLocalizationProvider).LocalizationProvider = mockLocalizationProvider;
+(globalThis as GlobalWithLocalizationProvider).useLanguage = () => ({
+  setLanguage: () => {},
+  language: 'en',
+});
 
 test('LanguageToggler Component', () => {
   render(
