@@ -3,30 +3,38 @@ import { materialLightInit } from '@uiw/codemirror-theme-material';
 import { langs } from '@uiw/codemirror-extensions-langs';
 import { Dispatch, useCallback } from 'react';
 
-const options = {
-  settings: {
-    fontFamily: 'FiraCode',
-    lineHighlight: '#FAFAFA',
-    background: '#FAFAFA',
-    gutterBackground: '#FAFAFA',
-  },
-};
-
 type PropsType = {
-  setQuery: Dispatch<React.SetStateAction<string>>;
-  formattedQuery: string;
+  setQuery?: Dispatch<React.SetStateAction<string>>;
+  response?: string;
+  readonly?: boolean;
 };
 
-export const QueryEditor = ({ setQuery, formattedQuery }: PropsType) => {
+export const QueryEditor: React.FC<PropsType> = ({ setQuery, response = '', readonly = false }) => {
   const onChange = useCallback((val: string) => {
-    setQuery(val);
+    if (setQuery) {
+      setQuery(val);
+    }
   }, []);
+
+  const options = {
+    settings: {
+      fontFamily: 'FiraCode',
+      lineHighlight: readonly ? '#FFFFFF' : '#FAFAFA',
+      background: readonly ? '#FFFFFF' : '#FAFAFA',
+      gutterBackground: readonly ? '#FFFFFF' : '#FAFAFA',
+    },
+  };
 
   return (
     <CodeMirror
+      value={response}
+      basicSetup={{
+        lineNumbers: !readonly,
+        rectangularSelection: !readonly,
+      }}
+      readOnly={readonly}
       height="100%"
       className="h-full"
-      value={formattedQuery}
       theme={materialLightInit(options)}
       extensions={[langs.json()]}
       onChange={onChange}

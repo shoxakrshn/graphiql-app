@@ -38,8 +38,8 @@ const workWithQuery = (graphqlQuery: string) => {
   // Add '}' and linebreak numberClosures number of times
   const finalQuery = assembledQuery + ('\n' + '}').repeat(numberClosures);
 
-  const res = processGraphQLQuery(finalQuery);
-  return res;
+  const finalResult = processGraphQLQuery(finalQuery);
+  return finalResult;
 };
 
 const normalize = (str: string) => {
