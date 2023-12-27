@@ -1,13 +1,16 @@
 import { useLanguage } from '../../app/context/localizationContext/LocalizationContext';
 import loginImg from '../../app/assets/icons/welcome.svg';
 import styles from './Main.module.scss';
-import { Button } from '../../shared/ui';
+import { AppLink } from '../../shared/ui';
 import { eButtonType } from '../../shared/utils/data';
 import shoha from '../../app/assets/images/shoha.png';
 import liza from '../../app/assets/images/liza.jpeg';
 import shahzod from '../../app/assets/images/shahzod.jpeg';
+import { useAppSelector } from '../../app/store/hooks/hooks';
+import { selectIsUser } from '../../app/store/slices/authSlices';
 
 const Main = () => {
+  const isUser = useAppSelector(selectIsUser);
   const { t } = useLanguage();
 
   return (
@@ -19,7 +22,9 @@ const Main = () => {
           <h2 className={styles.header}>{t('welcome-header')}</h2>
           <h3 className={styles.subheader}>{t('welcome-subheader')}</h3>
           <p className={styles.info}>{t('welcome-info')}</p>
-          <Button text={t('welcome-start')} typeButton={eButtonType.Filled} />
+          <AppLink typeButton={eButtonType.Filled} to={isUser ? '/editor' : '/signin'}>
+            {t('welcome-start')}
+          </AppLink>
           <div className={styles.team}>
             <div className={styles.teamMember}>
               <img src={shoha} className={styles.avatar} />
