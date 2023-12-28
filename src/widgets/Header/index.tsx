@@ -43,11 +43,21 @@ export const Header = () => {
   const handleSignOut = async () => {
     try {
       await auth.signOut();
-      toast.success(t('success-sing-out'));
+      toast.success(t('success-sing-out'), {
+        closeButton: false,
+        onClick: () => {
+          toast.dismiss();
+        },
+      });
       dispatch(cleanAuth());
       navigate('/');
     } catch (error) {
-      toast.error(t('error-sing-out'));
+      toast.error(t('error-sing-out'), {
+        closeButton: false,
+        onClick: () => {
+          toast.dismiss();
+        },
+      });
     }
   };
 
