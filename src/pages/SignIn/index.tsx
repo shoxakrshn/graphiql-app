@@ -40,12 +40,22 @@ export const SignIn: React.FC = () => {
       await signInWithEmailAndPassword(auth, email, password);
       const userInfo = await getUserInfo(email);
       if (userInfo) {
-        toast.success(t('success-sing-in'));
+        toast.success(t('success-sing-in'), {
+          closeButton: false,
+          onClick: () => {
+            toast.dismiss();
+          },
+        });
         dispatch(createAuth(userInfo));
         navigate('/');
       }
     } catch (error) {
-      toast.error(t('error-sing-in'));
+      toast.error(t('error-sing-in'), {
+        closeButton: false,
+        onClick: () => {
+          toast.dismiss();
+        },
+      });
     }
   };
 

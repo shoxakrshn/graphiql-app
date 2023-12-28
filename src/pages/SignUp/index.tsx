@@ -42,12 +42,22 @@ export const SignUp: React.FC = () => {
       const userInfo = await getUserInfo(email);
 
       if (userInfo) {
-        toast.success(t('success-sing-up'));
+        toast.success(t('success-sing-up'), {
+          closeButton: false,
+          onClick: () => {
+            toast.dismiss();
+          },
+        });
         dispatch(createAuth(userInfo));
         navigate('/');
       }
     } catch (error) {
-      toast.error(t('error-sing-up'));
+      toast.error(t('error-sing-up'), {
+        closeButton: false,
+        onClick: () => {
+          toast.dismiss();
+        },
+      });
     }
   };
 
