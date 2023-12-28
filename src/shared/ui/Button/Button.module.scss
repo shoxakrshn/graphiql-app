@@ -1,5 +1,5 @@
 %button {
-  @apply w-full rounded-[20px] p-2 whitespace-nowrap;
+  @apply w-full rounded-[20px] p-2 whitespace-nowrap whitespace-nowrap transition-all duration-300 ease-in-out;
 }
 
 .filled {
@@ -8,7 +8,7 @@
   color: white;
 
   &:hover {
-    background-color: var(--color-hover);
+    background-color: var(--color-hover) !important;
   }
 }
 
@@ -17,6 +17,7 @@
   background-color: var(--color-basic) !important;
   color: var(--color-primary);
   border: 2px solid var(--color-primary);
+  transition-delay: 200ms;
 
   &:hover {
     background-color: var(--color-primary) !important;
