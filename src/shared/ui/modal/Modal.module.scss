@@ -1,0 +1,58 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 80%;
+  height: 100vh;
+  background-color: var(--color-basic);
+  display: flex;
+  justify-content: flex-end;
+  align-items: self-start;
+  overflow-x: hidden;
+  animation: slideIn 0.3s ease-out;
+  z-index: 500;
+}
+
+.modal {
+  display: flex;
+  justify-content: flex-end;
+  align-items: self-start;
+  width: 50%;
+  flex-wrap: wrap;
+  margin: 0;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-out;
+}
+
+.modalHeader {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: self-start;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.title {
+  margin: 0;
+}
+
+.closeButton {
+  @apply w-7 h-7 ml-auto mb-4;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+
+  &:hover {
+    border-bottom: none !important;
+  }
+}
