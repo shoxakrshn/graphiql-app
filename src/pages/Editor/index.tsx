@@ -13,7 +13,6 @@ import { ChevronUp } from '../../app/assets/icons/chevronUp';
 import { ChevronDown } from '../../app/assets/icons/chevronDown';
 import { selectIsUser } from '../../app/store/slices/authSlices';
 import { HeadersEditor, QueryEditor, VariableEditor } from '../../shared/ui';
-import { getSchema } from '../../shared/utils/getSchema';
 import { getAPI } from '../../shared/utils/getApi';
 import { convertToPrettier } from '../../app/prettier/prettierApp';
 import { AppPrettier } from '../../app/assets/icons/AppPrettier';
@@ -49,10 +48,6 @@ const Editor = () => {
     if (!isUser) {
       navigate('/', { replace: true });
     }
-  }, []);
-
-  useEffect(() => {
-    getSchema(url);
   }, []);
 
   const onChevronHandler = useCallback(() => {

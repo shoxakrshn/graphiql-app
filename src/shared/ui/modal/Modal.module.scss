@@ -2,26 +2,16 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 80%;
+  width: 40%;
   height: 100vh;
   background-color: var(--color-basic);
   display: flex;
   justify-content: flex-end;
-  align-items: self-start;
+  flex-wrap: wrap;
   overflow-x: hidden;
   animation: slideIn 0.3s ease-out;
   z-index: 500;
-}
-
-.modal {
-  display: flex;
-  justify-content: flex-end;
-  align-items: self-start;
-  width: 50%;
-  flex-wrap: wrap;
-  margin: 0;
-  transform: translateX(-100%);
-  transition: transform 0.3s ease-out;
+  animation-play-state: running;
 }
 
 .modalHeader {
@@ -29,23 +19,28 @@
   display: flex;
   justify-content: flex-end;
   align-items: self-start;
+  padding: 8px;
 }
 
-@keyframes slideIn {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
+.modalContent {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: self-start;
+  padding: 15px;
 
-.title {
-  margin: 0;
+  typeList {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 10px;
+  }
 }
 
 .closeButton {
-  @apply w-7 h-7 ml-auto mb-4;
+  @apply w-7 h-7 mb-4;
   cursor: pointer;
   border: none;
   background: none;
@@ -54,5 +49,14 @@
 
   &:hover {
     border-bottom: none !important;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
   }
 }
