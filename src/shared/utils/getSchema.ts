@@ -1,8 +1,8 @@
-import { schema } from './queries';
+import { IntrospectionQuery, getIntrospectionQuery } from 'graphql';
 
 export interface SchemaType {
   name: string;
-  fields?: FieldType[];
+  fields: FieldType[];
   description: string;
 }
 
@@ -21,9 +21,26 @@ export const getSchema = async (url: string) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       operationName: 'IntrospectionQuery',
-      query: schema,
+      query: getIntrospectionQuery(),
     }),
   });
 
-  return await result.json();
+  const { data }: { data: IntrospectionQuery } = await result.json();
+
+  const schemaTypes: SchemaType[] = data.__schema.types.map((type) => ({
+    name: type.name,
+    description: type.description || '',
+    fields:
+      type.kind === 'OBJECT' && type.fields
+        ? type.fields.map((field) => ({
+            name: field.name,
+            type: {
+              name: field.type ? field.type.kind || '' : '',
+            },
+            description: field.description || '',
+          }))
+        : [],
+  }));
+
+  return schemaTypes;
 };

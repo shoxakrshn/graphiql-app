@@ -23,8 +23,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, url }) => {
       try {
         if (isOpen) {
           const schema = await getSchema(url);
-          console.log(schema);
-          setSchemaTypes(schema.data.__schema.types);
+          setSchemaTypes(schema);
         }
       } catch (error) {
         toast.error(t('error-fetching'), {
