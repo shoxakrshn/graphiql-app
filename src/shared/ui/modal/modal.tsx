@@ -16,12 +16,14 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, url }) => {
   const { t } = useLanguage();
   const [schemaTypes, setSchemaTypes] = useState<SchemaType[]>([]);
   const [selectedType, setSelectedType] = useState<string | null>(null);
+  const [selectedTypeDescription, setSelectedTypeDescription] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (isOpen) {
           const schema = await getSchema(url);
+          console.log(schema);
           setSchemaTypes(schema.data.__schema.types);
         }
       } catch (error) {
@@ -39,20 +41,28 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, url }) => {
 
   const renderFields = (fields: FieldType[]) => {
     return (
-      <ul>
-        {fields.map((field) => (
-          <li key={field.name}>
-            <strong>{field.name}:</strong> {field.type.name}
-            <p>{field.description}</p>
-            {field.fields && renderFields(field.fields)}
-          </li>
-        ))}
-      </ul>
+      <>
+        <ul>
+          {fields.map((field) => (
+            <li key={field.name}>
+              <strong>{field.name}:</strong> {field.type.name}
+              <p>{field.description}</p>
+              {field.fields && renderFields(field.fields)}
+            </li>
+          ))}
+        </ul>
+      </>
     );
   };
 
-  const handleTypeClick = (typeName: string) => {
-    setSelectedType(typeName === selectedType ? null : typeName);
+  const handleTypeClick = (typeName: string, typeDescription: string) => {
+    if (typeName === selectedType) {
+      setSelectedType(null);
+      setSelectedTypeDescription(null);
+    } else {
+      setSelectedType(typeName);
+      setSelectedTypeDescription(typeDescription);
+    }
   };
 
   if (!isOpen) return null;
@@ -69,11 +79,19 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, url }) => {
           {schemaTypes.map((type) => (
             <li key={type.name}>
               <strong>
-                <a href={`#${type.name}`} onClick={() => handleTypeClick(type.name)}>
+                <a
+                  href={`#${type.name}`}
+                  onClick={() => handleTypeClick(type.name, type.description)}
+                >
                   {type.name}
                 </a>
               </strong>
-              {selectedType === type.name && type.fields && renderFields(type.fields)}
+              {selectedType === type.name && (
+                <div>
+                  {selectedTypeDescription && <p>{selectedTypeDescription}</p>}
+                  {type.fields && renderFields(type.fields)}
+                </div>
+              )}
             </li>
           ))}
         </ul>

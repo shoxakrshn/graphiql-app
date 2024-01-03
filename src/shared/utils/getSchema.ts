@@ -3,6 +3,7 @@ import { schema } from './queries';
 export interface SchemaType {
   name: string;
   fields?: FieldType[];
+  description: string;
 }
 
 export interface FieldType {
