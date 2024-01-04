@@ -8,11 +8,11 @@ import {
   getIntrospectionQuery,
 } from 'graphql';
 
-export interface SchemaType {
+export type SchemaType = {
   name: string;
   fields: FieldType[];
   description: string;
-}
+};
 
 export type TypeDetails = {
   name: string;
@@ -20,91 +20,20 @@ export type TypeDetails = {
   nonNull: boolean;
 };
 
-export interface FieldType {
+export type FieldType = {
   name: string;
   args?: ArgType[];
   type: TypeDetails;
   description?: string;
   fields?: FieldType[];
-}
+};
 
-export interface ArgType {
+export type ArgType = {
   name: string;
   type: TypeDetails;
-}
+};
 
-// const fieldsType = (field: IntrospectionField | IntrospectionInputValue) => {
-//   if (
-//     field.type.kind === 'OBJECT' ||
-//     field.type.kind === 'SCALAR' ||
-//     field.type.kind === 'INPUT_OBJECT'
-//   ) {
-//     return {
-//       name: field.type.name,
-//       list: false,
-//       nonNull: false,
-//     };
-//   }
-
-//   if (field.type.kind === 'LIST') {
-//     if (field.type.ofType.kind === 'OBJECT') {
-//       return {
-//         name: field.type.ofType.name,
-//         list: true,
-//         nonNull: false,
-//       };
-//     }
-//   }
-
-//   if (field.type.kind === 'NON_NULL') {
-//     if (field.type.ofType.kind === 'OBJECT' || field.type.ofType.kind === 'SCALAR') {
-//       return {
-//         name: field.type.ofType.name,
-//         list: false,
-//         nonNull: true,
-//       };
-//     }
-//   }
-
-//   if (field.type.kind === 'NON_NULL') {
-//     if (field.type.ofType.kind === 'LIST') {
-//       if (
-//         field.type.ofType.ofType.kind === 'OBJECT' ||
-//         field.type.ofType.ofType.kind === 'SCALAR'
-//       ) {
-//         return {
-//           name: field.type.ofType.ofType.name,
-//           list: true,
-//           nonNull: true,
-//         };
-//       }
-//     }
-//   }
-
-//   if (field.type.kind === 'NON_NULL') {
-//     if (field.type.ofType.kind === 'LIST') {
-//       if (field.type.ofType.ofType.kind === 'NON_NULL') {
-//         if (
-//           field.type.ofType.ofType.ofType.kind === 'OBJECT' ||
-//           field.type.ofType.ofType.ofType.kind === 'SCALAR'
-//         )
-//           return {
-//             name: field.type.ofType.ofType.ofType.name,
-//             list: true,
-//             nonNull: true,
-//           };
-//       }
-//     }
-//   }
-
-//   return {
-//     name: '',
-//     list: false,
-//     nonNull: false,
-//   };
-// };
-
-const fieldsType = (field: IntrospectionField | IntrospectionInputValue) => {
+const getFieldsType = (field: IntrospectionField | IntrospectionInputValue) => {
   const getTypeDetails = (
     type: IntrospectionOutputTypeRef | IntrospectionInputTypeRef,
   ): TypeDetails => {
@@ -129,21 +58,21 @@ const fieldsType = (field: IntrospectionField | IntrospectionInputValue) => {
   return getTypeDetails(field.type);
 };
 
-const argsType = (field: IntrospectionField) => {
+const getArgsType = (field: IntrospectionField) => {
   return field.args.map((arg) => {
     return {
       name: arg.name,
-      type: fieldsType(arg),
+      type: getFieldsType(arg),
     };
   });
 };
 
-const getType = (type: IntrospectionType) => {
+const getTypes = (type: IntrospectionType) => {
   if (type.kind === 'OBJECT') {
     return type.fields.map((field) => ({
       name: field.name,
-      args: argsType(field),
-      type: fieldsType(field),
+      args: getArgsType(field),
+      type: getFieldsType(field),
       description: field.description || '',
     }));
   }
@@ -151,7 +80,7 @@ const getType = (type: IntrospectionType) => {
   if (type.kind === 'INPUT_OBJECT') {
     return type.inputFields.map((field) => ({
       name: field.name,
-      type: fieldsType(field),
+      type: getFieldsType(field),
       description: field.description || '',
     }));
   }
@@ -160,31 +89,30 @@ const getType = (type: IntrospectionType) => {
 };
 
 export const getSchema = async (url: string) => {
-  const result = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      operationName: 'IntrospectionQuery',
-      query: getIntrospectionQuery(),
-    }),
-  });
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        operationName: 'IntrospectionQuery',
+        query: getIntrospectionQuery(),
+      }),
+    });
 
-  const { data }: { data: IntrospectionQuery } = await result.json();
-  console.log('data', data);
+    if (!response.ok) throw new Error('Network response was not ok.');
 
-  const exclude = data.__schema.types.filter((type) => {
-    return !type.name.startsWith('__');
-  });
+    const { data }: { data: IntrospectionQuery } = await response.json();
 
-  console.log('exclude', exclude);
+    const schemaTypes = data.__schema.types
+      .filter((type) => !type.name.startsWith('__') && type.kind !== 'ENUM')
+      .map((type) => ({
+        name: type.name,
+        description: type.description || '',
+        fields: getTypes(type),
+      }));
 
-  const schemaTypes: SchemaType[] = exclude.map((type) => ({
-    name: type.name,
-    description: type.description || '',
-    fields: getType(type),
-  }));
-
-  console.log('shematypes:', schemaTypes);
-
-  return schemaTypes;
+    return schemaTypes;
+  } catch {
+    throw new Error('Error fetching schema');
+  }
 };
