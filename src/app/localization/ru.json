@@ -22,5 +22,11 @@
   "main-page": "Главная страница",
   "success-sing-up": "Вы успешно зарегистрированы!",
   "success-sing-in": "Вы успешно вошли в приложение!",
-  "success-sing-out": "Вы вышли из приложения."
+  "success-sing-out": "Вы вышли из приложения.",
+  "shoha.name": "Шоха",
+  "shoha.description": "Арихитектура проекта, Редактор, Документация",
+  "liza.name": "Лиза",
+  "liza.description": "Авторизация / Регистрация, Prettier, Документация",
+  "shahzod.name": "Шахзод",
+  "shahzod.description": "Главная страница, Тесты, I18"
 }
