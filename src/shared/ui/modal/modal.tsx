@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import close from '../../../app/assets/icons/close.svg';
-import { getSchema, SchemaType, FieldType } from '../../utils/getSchema';
+import { getSchema, SchemaType, FieldType, TypeDetails } from '../../utils/getSchema';
 import { useLanguage } from '../../../app/context/localizationContext/LocalizationContext';
 import styles from './Modal.module.scss';
 
@@ -11,6 +11,10 @@ interface ModalProps {
   onClose: () => void;
   url: string;
 }
+
+const renderArgs = ({ name, list, nonNull }: TypeDetails) => {
+  return list ? `[${name}${nonNull ? '!' : ''}]` : `${name}${nonNull ? '!' : ''}`;
+};
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, url }) => {
   const { t } = useLanguage();
@@ -44,7 +48,13 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, url }) => {
         <ul>
           {fields.map((field) => (
             <li key={field.name}>
-              <strong>{field.name}:</strong> {field.type.name}
+              <strong>{field.name}</strong>
+              {field.args && field.args.length > 0 && (
+                <span>
+                  ({field.args.map((arg) => `${arg.name}: ${renderArgs(arg.type)}`).join(', ')})
+                </span>
+              )}
+              : {renderArgs(field.type)}
               <p>{field.description}</p>
               {field.fields && renderFields(field.fields)}
             </li>
