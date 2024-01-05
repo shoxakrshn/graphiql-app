@@ -30,27 +30,30 @@ const Main = () => {
               <img src={shoha} className={styles.avatar} />
               <span>
                 <h4 className={styles.name}>
-                  <a href="https://github.com/shoxakrshn">Shoha</a>
+                  <a href="https://github.com/shoxakrshn">{t('shoha.name')}</a>
                 </h4>
-                <p>Team-Lead, Frontend Developer</p>
+                <h5 className={styles.role}>Team-Lead, Frontend Developer</h5>
+                <p>{t('shoha.description')}</p>
               </span>
             </div>
             <div className={styles.teamMember}>
               <img src={liza} className={styles.avatar} />
               <span>
                 <h4 className={styles.name}>
-                  <a href="https://github.com/LizavetaNik">Liza</a>
+                  <a href="https://github.com/LizavetaNik">{t('liza.name')}</a>
                 </h4>
-                <p>Frontend Developer, Designer</p>
+                <h5 className={styles.role}>Frontend Developer</h5>
+                <p>{t('liza.description')}</p>
               </span>
             </div>
             <div className={styles.teamMember}>
               <img src={shahzod} className={styles.avatar} />
               <span>
                 <h4 className={styles.name}>
-                  <a href="https://github.com/shahzod222">Shahzod</a>
+                  <a href="https://github.com/shahzod222">{t('shahzod.name')}</a>
                 </h4>
-                <p>Frontend Developer, Tech-Lead</p>
+                <h6 className={styles.role}>Frontend Developer</h6>
+                <p>{t('shahzod.description')}</p>
               </span>
             </div>
           </div>

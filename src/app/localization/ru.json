@@ -23,5 +23,11 @@
   "success-sing-up": "Вы успешно зарегистрированы!",
   "success-sing-in": "Вы успешно вошли в приложение!",
   "success-sing-out": "Вы вышли из приложения.",
+  "shoha.name": "Шоха",
+  "shoha.description": "Арихитектура, Редактор, Документация",
+  "liza.name": "Лиза",
+  "liza.description": "Регистрация, Prettier, Документация",
+  "shahzod.name": "Шахзод",
+  "shahzod.description": "Главная страница, Тесты, Перевод",
   "error-fetching": "Ошибка получения или рендеринга схемы GraphQL."
 }

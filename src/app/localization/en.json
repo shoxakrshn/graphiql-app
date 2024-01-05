@@ -23,5 +23,11 @@
   "success-sing-up": "You have successfully registered!",
   "success-sing-in": "You have successfully logged into the application!",
   "success-sing-out": "You have left the application.",
+  "shoha.name": "Shoha",
+  "shoha.description": "Architecture, Editor, Documentation",
+  "liza.name": "Liza",
+  "liza.description": "Registration, Prettier, Documentation",
+  "shahzod.name": "Shahzod",
+  "shahzod.description": "Main Page, Tests, Translation",
   "error-fetching": "Error fetching or rendering GraphQL schema."
 }
