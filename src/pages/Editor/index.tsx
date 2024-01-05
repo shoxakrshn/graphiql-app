@@ -13,12 +13,12 @@ import { ChevronUp } from '../../app/assets/icons/chevronUp';
 import { ChevronDown } from '../../app/assets/icons/chevronDown';
 import { selectIsUser } from '../../app/store/slices/authSlices';
 import { HeadersEditor, QueryEditor, VariableEditor } from '../../shared/ui';
-import { getSchema } from '../../shared/utils/getSchema';
 import { getAPI } from '../../shared/utils/getApi';
 import { convertToPrettier } from '../../app/prettier/prettierApp';
 import { AppPrettier } from '../../app/assets/icons/AppPrettier';
 import styles from './Editor.module.scss';
 import { useAppSelector } from '../../app/store/hooks/hooks';
+import Modal from '../../shared/ui/modal/modal';
 
 type TabType = 'variables' | 'headers';
 
@@ -36,14 +36,18 @@ const Editor = () => {
   const navigate = useNavigate();
   const isUser = useAppSelector(selectIsUser);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   useEffect(() => {
     if (!isUser) {
       navigate('/', { replace: true });
     }
-  }, []);
-
-  useEffect(() => {
-    getSchema(url);
   }, []);
 
   const onChevronHandler = useCallback(() => {
@@ -85,82 +89,85 @@ const Editor = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.leftColumn}>
-        <label htmlFor="url" className={styles.urlLabel}>
-          <input
-            value={url}
-            onChange={onUrlChange}
-            type="text"
-            placeholder="URL"
-            className={styles.urlInput}
-            name="url"
-            id="url"
-          />
-        </label>
-        <div className={styles.editorsContainer}>
-          <PanelGroup direction="vertical">
-            <Panel defaultSize={100}>
-              <div className="h-full relative">
-                <QueryEditor setQuery={setQuery} response={query} />
-                <div className={styles.buttonsContainer}>
-                  <button onClick={onPlayHandler} className={styles.sideButtons}>
-                    <Play className="fill-white" />
-                  </button>
-                  <button className={styles.sideButtons}>
-                    <Document />
-                  </button>
-                  <button onClick={onPrettierClickHandler} className={styles.sideButtons}>
-                    <AppPrettier />
-                  </button>
+    <>
+      <div className={styles.container}>
+        <div className={styles.leftColumn}>
+          <label htmlFor="url" className={styles.urlLabel}>
+            <input
+              value={url}
+              onChange={onUrlChange}
+              type="text"
+              placeholder="URL"
+              className={styles.urlInput}
+              name="url"
+              id="url"
+            />
+          </label>
+          <div className={styles.editorsContainer}>
+            <PanelGroup direction="vertical">
+              <Panel defaultSize={100}>
+                <div className="h-full relative">
+                  <QueryEditor setQuery={setQuery} response={query} />
+                  <div className={styles.buttonsContainer}>
+                    <button onClick={onPlayHandler} className={styles.sideButtons}>
+                      <Play className="fill-white" />
+                    </button>
+                    <button onClick={openModal} className={styles.sideButtons}>
+                      <Document />
+                    </button>
+                    <button onClick={onPrettierClickHandler} className={styles.sideButtons}>
+                      <AppPrettier />
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </Panel>
-            <PanelResizeHandle className={styles.pageResize}>
-              <div className="flex items-center gap-2">
-                <span
-                  onClick={() => onTabHandler('variables')}
-                  className={cn(styles.tab, {
-                    [styles.tabActive]: tab === 'variables',
-                  })}
-                >
-                  variables
+              </Panel>
+              <PanelResizeHandle className={styles.pageResize}>
+                <div className="flex items-center gap-2">
+                  <span
+                    onClick={() => onTabHandler('variables')}
+                    className={cn(styles.tab, {
+                      [styles.tabActive]: tab === 'variables',
+                    })}
+                  >
+                    variables
+                  </span>
+                  <span
+                    onClick={() => onTabHandler('headers')}
+                    className={cn(styles.tab, {
+                      [styles.tabActive]: tab === 'headers',
+                    })}
+                  >
+                    headers
+                  </span>
+                </div>
+                <span onClick={onChevronHandler}>
+                  {isCollapsed ? <ChevronUp /> : <ChevronDown />}
                 </span>
-                <span
-                  onClick={() => onTabHandler('headers')}
-                  className={cn(styles.tab, {
-                    [styles.tabActive]: tab === 'headers',
-                  })}
-                >
-                  headers
-                </span>
-              </div>
-              <span onClick={onChevronHandler}>
-                {isCollapsed ? <ChevronUp /> : <ChevronDown />}
-              </span>
-            </PanelResizeHandle>
-            <Panel
-              minSize={20}
-              collapsible
-              ref={panelRef}
-              onExpand={() => setIsCollapsed(false)}
-              onCollapse={() => {
-                setIsCollapsed(true);
-              }}
-            >
-              {tab === 'variables' ? (
-                <VariableEditor setVariables={setVariables} value={variables} />
-              ) : (
-                <HeadersEditor setHeaders={setHeaders} value={headers} />
-              )}
-            </Panel>
-          </PanelGroup>
+              </PanelResizeHandle>
+              <Panel
+                minSize={20}
+                collapsible
+                ref={panelRef}
+                onExpand={() => setIsCollapsed(false)}
+                onCollapse={() => {
+                  setIsCollapsed(true);
+                }}
+              >
+                {tab === 'variables' ? (
+                  <VariableEditor setVariables={setVariables} value={variables} />
+                ) : (
+                  <HeadersEditor setHeaders={setHeaders} value={headers} />
+                )}
+              </Panel>
+            </PanelGroup>
+          </div>
+        </div>
+        <div className={styles.rightColumn}>
+          <QueryEditor response={response} readonly />
         </div>
       </div>
-      <div className={styles.rightColumn}>
-        <QueryEditor response={response} readonly />
-      </div>
-    </div>
+      <Modal isOpen={isModalOpen} onClose={closeModal} url={url} />
+    </>
   );
 };
 
