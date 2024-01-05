@@ -24,9 +24,9 @@
   "success-sing-in": "You have successfully logged into the application!",
   "success-sing-out": "You have left the application.",
   "shoha.name": "Shoha",
-  "shoha.description": "Project architecture, Editor, Documentation",
+  "shoha.description": "Architecture, Editor, Documentation",
   "liza.name": "Liza",
-  "liza.description": "Authentication / Registration, Prettier, Documentation",
+  "liza.description": "Registration, Prettier, Documentation",
   "shahzod.name": "Shahzod",
-  "shahzod.description": "Main page, Tests, I18"
+  "shahzod.description": "Main Page, Tests, Translation"
 }

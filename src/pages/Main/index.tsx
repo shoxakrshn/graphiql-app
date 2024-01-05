@@ -32,6 +32,7 @@ const Main = () => {
                 <h4 className={styles.name}>
                   <a href="https://github.com/shoxakrshn">{t('shoha.name')}</a>
                 </h4>
+                <h5 className={styles.role}>Team-Lead, Frontend Developer</h5>
                 <p>{t('shoha.description')}</p>
               </span>
             </div>
@@ -41,6 +42,7 @@ const Main = () => {
                 <h4 className={styles.name}>
                   <a href="https://github.com/LizavetaNik">{t('liza.name')}</a>
                 </h4>
+                <h5 className={styles.role}>Frontend Developer</h5>
                 <p>{t('liza.description')}</p>
               </span>
             </div>
@@ -50,6 +52,7 @@ const Main = () => {
                 <h4 className={styles.name}>
                   <a href="https://github.com/shahzod222">{t('shahzod.name')}</a>
                 </h4>
+                <h6 className={styles.role}>Frontend Developer</h6>
                 <p>{t('shahzod.description')}</p>
               </span>
             </div>

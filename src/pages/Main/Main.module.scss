@@ -60,6 +60,10 @@
   color: var(--color-primary);
 }
 
+.role {
+  color: var(--color-accent);
+}
+
 @media screen and (max-width: 768px) {
   .content {
     width: 70%;
