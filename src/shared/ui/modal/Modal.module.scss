@@ -60,3 +60,29 @@
     transform: translateX(0);
   }
 }
+
+.fieldContainer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.8s ease-out;
+  transform-origin: top;
+}
+
+.visible {
+  max-height: 1000px;
+  transform: scaleY(1);
+}
+
+.fieldList {
+  margin-top: 10px;
+}
+
+.typeName {
+  cursor: pointer;
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+.typeName:hover {
+  color: var(--color-hover);
+}
