@@ -54,7 +54,14 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, url }) => {
                   ({field.args.map((arg) => `${arg.name}: ${renderArgs(arg.type)}`).join(', ')})
                 </span>
               )}
-              : {renderArgs(field.type)}
+              :{' '}
+              <a
+                className={styles.typeName}
+                href={`#${field.type.name}`}
+                onClick={() => handleTypeListClick(field.type.name)}
+              >
+                {renderArgs(field.type)}
+              </a>
               <p>{field.description}</p>
               {field.fields && renderFields(field.fields)}
             </li>
@@ -62,6 +69,15 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, url }) => {
         </ul>
       </>
     );
+  };
+
+  const handleTypeListClick = (typeName: string) => {
+    const matchedType = schemaTypes.find((schemaType) => schemaType.name === typeName);
+
+    if (matchedType) {
+      const { name, description } = matchedType;
+      handleTypeClick(name, description);
+    }
   };
 
   const handleTypeClick = (typeName: string, typeDescription: string) => {
@@ -89,18 +105,27 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, url }) => {
             <li key={type.name}>
               <strong>
                 <a
+                  className={styles.typeName}
                   href={`#${type.name}`}
                   onClick={() => handleTypeClick(type.name, type.description)}
                 >
                   {type.name}
                 </a>
               </strong>
-              {selectedType === type.name && (
-                <div>
-                  {selectedTypeDescription && <p>{selectedTypeDescription}</p>}
-                  {type.fields && renderFields(type.fields)}
-                </div>
-              )}
+              <div
+                className={`${styles.fieldContainer} ${
+                  selectedType === type.name ? styles.visible : ''
+                }`}
+              >
+                {selectedType === type.name && (
+                  <>
+                    {selectedTypeDescription && <p>{selectedTypeDescription}</p>}
+                    {type.fields && (
+                      <div className={styles.fieldList}>{renderFields(type.fields)}</div>
+                    )}
+                  </>
+                )}
+              </div>
             </li>
           ))}
         </ul>
