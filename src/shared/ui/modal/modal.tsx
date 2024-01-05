@@ -94,7 +94,23 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, url }) => {
             <strong>{field.name}</strong>
             {field.args && field.args.length > 0 && (
               <span>
-                ({field.args.map((arg) => `${arg.name}: ${renderArgs(arg.type)}`).join(', ')})
+                (
+                {field.args.map((arg, index) => (
+                  <React.Fragment key={index}>
+                    {index > 0 && ', '}
+                    <span>
+                      <strong>{arg.name}:</strong>{' '}
+                      <a
+                        className={styles.typeName}
+                        href={`#${arg.type.name}`}
+                        onClick={() => handleTypeListClick(arg.type.name)}
+                      >
+                        {renderArgs(arg.type)}
+                      </a>
+                    </span>
+                  </React.Fragment>
+                ))}
+                )
               </span>
             )}
             :{' '}
