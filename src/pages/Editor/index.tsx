@@ -18,7 +18,7 @@ import { convertToPrettier } from '../../app/prettier/prettierApp';
 import { AppPrettier } from '../../app/assets/icons/AppPrettier';
 import styles from './Editor.module.scss';
 import { useAppSelector } from '../../app/store/hooks/hooks';
-import Modal from '../../shared/ui/Modal';
+import Modal from '../../shared/ui/ModalDocumentation/index';
 
 type TabType = 'variables' | 'headers';
 
