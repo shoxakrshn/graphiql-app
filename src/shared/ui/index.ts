@@ -7,3 +7,4 @@ export * from './Burger';
 export * from './QueryEditor';
 export * from './VariablesEditor';
 export * from './HeadersEditor';
+export * from './ModalDocumentation';
