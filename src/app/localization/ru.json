@@ -29,4 +29,5 @@
   "liza.description": "Регистрация, Prettier, Документация",
   "shahzod.name": "Шахзод",
   "shahzod.description": "Главная страница, Тесты, Перевод"
+  "error-fetching": "Ошибка получения или рендеринга схемы GraphQL."
 }

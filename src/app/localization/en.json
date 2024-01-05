@@ -29,4 +29,5 @@
   "liza.description": "Registration, Prettier, Documentation",
   "shahzod.name": "Shahzod",
   "shahzod.description": "Main Page, Tests, Translation"
+  "error-fetching": "Error fetching or rendering GraphQL schema."
 }
