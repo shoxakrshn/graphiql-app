@@ -16,7 +16,7 @@ const workWithQuery = (graphqlQuery: string) => {
     const modifiedSubstring = index < array.length - 1 ? substring + '{' : substring;
     let result = modifiedSubstring.replace(/[{}]/g, '').replace(/\s+/g, ' ').trim();
 
-    if (!result.includes('(') && !result.includes(')')) {
+    if (!result.includes('(') && !result.includes(')') && !result.includes(':')) {
       const values = result.split(/\s+/);
       result = values
         .map((value, i) =>

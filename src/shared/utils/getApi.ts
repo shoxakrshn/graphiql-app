@@ -4,14 +4,22 @@ export const getAPI = async (
   variables?: string,
   headers?: { [x: string]: string },
 ) => {
-  const result = await fetch(url, {
-    method: 'POST',
-    headers: headers || { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      query,
-      variables,
-    }),
-  });
+  try {
+    const result = await fetch(url, {
+      method: 'POST',
+      headers: headers || { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        query,
+        variables,
+      }),
+    });
 
-  return await result.json();
+    if (!result.ok) {
+      throw new Error(`HTTP error! Status: ${result.status}`);
+    }
+
+    return await result.json();
+  } catch (error) {
+    throw error;
+  }
 };
