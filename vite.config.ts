@@ -19,9 +19,10 @@ export default defineConfig({
       include: ['src/shared/ui/**/*.tsx', 'src/pages/**/*.tsx', 'src/widgets/**/*.tsx'],
       exclude: [
         'src/pages/index.tsx',
-        'src/pages/Editor/index.tsx',
-        'src/shared/ui/ErrorFallback/index.tsx',
-        'src/shared/ui/QueryEditor/index.tsx',
+        'src/pages/Editor',
+        'src/shared/ui/ErrorFallback',
+        'src/shared/ui/QueryEditor',
+        'src/shared/ui/ModalDocumentation',
       ],
     },
   },
