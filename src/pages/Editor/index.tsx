@@ -79,6 +79,7 @@ const Editor = () => {
 
       setResponse(convertToPrettier(JSON.stringify(request)));
     } catch (error) {
+      setResponse('');
       toast.error(t('error-API-request'), {
         closeButton: false,
         onClick: () => {
