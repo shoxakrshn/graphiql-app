@@ -12,16 +12,21 @@ export function convertToPrettier(file: string): string {
 }
 
 const workWithQuery = (graphqlQuery: string) => {
-  // Add an array that contains values ​​equal to the line up to { or between two { {
   const queryArray = graphqlQuery.split('{').map((substring, index, array) => {
     const modifiedSubstring = index < array.length - 1 ? substring + '{' : substring;
-    // Delete '{' and '}', leaving spaces and line breaks
     let result = modifiedSubstring.replace(/[{}]/g, '').replace(/\s+/g, ' ').trim();
 
-    // If there are no '(' or ')' characters in the line, add a line break after each value except the last one
     if (!result.includes('(') && !result.includes(')')) {
       const values = result.split(/\s+/);
-      result = values.map((value, i) => (i < values.length - 1 ? value + '\n' : value)).join(' ');
+      result = values
+        .map((value, i) =>
+          i === 0 && value.toLowerCase() === 'query'
+            ? value
+            : i < values.length - 1
+              ? value + '\n'
+              : value,
+        )
+        .join(' ');
     }
     result = result.trim();
     return result;
@@ -30,12 +35,10 @@ const workWithQuery = (graphqlQuery: string) => {
   const numberClosures = queryArray.length - 1;
   const assembledQuery = queryArray
     .map((substring, index, array) => {
-      // Add a space and '{' after each line except the last one
       return index < array.length - 1 ? substring + ' {' : substring;
     })
     .join('\n');
 
-  // Add '}' and linebreak numberClosures number of times
   const finalQuery = assembledQuery + ('\n' + '}').repeat(numberClosures);
 
   const finalResult = processGraphQLQuery(finalQuery);
@@ -105,5 +108,5 @@ const processGraphQLQuery = (str: string) => {
     }
   }
 
-  return result.replace(/query(?!\s)/, 'query ');
+  return result.replace(/(?:query|Query)(?!\s)/g, 'query ');
 };
