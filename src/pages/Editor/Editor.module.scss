@@ -1,6 +1,6 @@
 .container {
   @apply flex gap-4;
-  height: 100vh;
+  height: 100%;
 
   @include maxWidthCustom(768px) {
     @apply flex-col;
