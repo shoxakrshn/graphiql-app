@@ -12,6 +12,7 @@ body {
 
 #root {
   @apply flex flex-col gap-4;
+  min-height: 100vh;
   height: 100%;
 }
 
