@@ -5,16 +5,17 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
 body {
-  @apply px-4;
+  min-height: 100vh;
 }
-body,
+
 #root {
   @apply flex flex-col gap-4;
-  min-height: 100vh;
-  height: 100vh;
+  height: 100%;
 }
 
 main {
+  @apply px-4;
   flex-grow: 1;
 }
