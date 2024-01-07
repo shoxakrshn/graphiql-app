@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { useLanguage } from '../../../app/context/localizationContext/LocalizationContext';
@@ -18,10 +19,12 @@ type PropsType = {
 export const NavMenu: React.FC<PropsType> = ({ userStatus, layout, email }) => {
   const { t } = useLanguage();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSignOut = async () => {
     try {
       await auth.signOut();
+      navigate('/');
       toast.success(t('success-sing-out'), {
         closeButton: false,
         onClick: () => {
