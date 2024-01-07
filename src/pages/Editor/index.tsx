@@ -6,6 +6,7 @@ import {
   PanelGroup,
   PanelResizeHandle,
 } from 'react-resizable-panels';
+import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { Document } from '../../app/assets/icons/Document';
 import { Play } from '../../app/assets/icons/Play';
@@ -16,13 +17,15 @@ import { HeadersEditor, QueryEditor, VariableEditor } from '../../shared/ui';
 import { getAPI } from '../../shared/utils/getApi';
 import { convertToPrettier } from '../../app/prettier/prettierApp';
 import { AppPrettier } from '../../app/assets/icons/AppPrettier';
-import styles from './Editor.module.scss';
 import { useAppSelector } from '../../app/store/hooks/hooks';
 import Modal from '../../shared/ui/ModalDocumentation/index';
+import { useLanguage } from '../../app/context/localizationContext/LocalizationContext';
+import styles from './Editor.module.scss';
 
 type TabType = 'variables' | 'headers';
 
 const Editor = () => {
+  const { t } = useLanguage();
   const [tab, setTab] = useState<TabType>('variables');
   const [query, setQuery] = useState<string>('');
   const [variables, setVariables] = useState<string>('');
@@ -66,13 +69,24 @@ const Editor = () => {
   );
 
   const onPlayHandler = async () => {
-    const request = await getAPI(
-      url,
-      query,
-      variables && JSON.parse(variables),
-      headers && JSON.parse(headers),
-    );
-    setResponse(convertToPrettier(JSON.stringify(request)));
+    try {
+      const request = await getAPI(
+        url,
+        query,
+        variables && JSON.parse(variables),
+        headers && JSON.parse(headers),
+      );
+
+      setResponse(convertToPrettier(JSON.stringify(request)));
+    } catch (error) {
+      setResponse('');
+      toast.error(t('error-API-request'), {
+        closeButton: false,
+        onClick: () => {
+          toast.dismiss();
+        },
+      });
+    }
   };
 
   const onUrlChange = useCallback(
