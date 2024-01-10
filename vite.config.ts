@@ -17,13 +17,7 @@ export default defineConfig({
       reportsDirectory: './src/tests/coverage',
       all: true,
       include: ['src/shared/ui/**/*.tsx', 'src/pages/**/*.tsx', 'src/widgets/**/*.tsx'],
-      exclude: [
-        'src/pages/index.tsx',
-        'src/pages/Editor',
-        'src/shared/ui/ErrorFallback',
-        'src/shared/ui/QueryEditor',
-        'src/shared/ui/ModalDocumentation',
-      ],
+      exclude: ['src/pages/index.tsx'],
     },
   },
   css: {
