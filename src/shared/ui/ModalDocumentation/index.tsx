@@ -31,6 +31,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, url }) => {
     const fetchData = async () => {
       try {
         if (isOpen) {
+          setSchemaTypes([]);
           const schema = await getSchema(url);
           setSchemaTypes(schema);
         }

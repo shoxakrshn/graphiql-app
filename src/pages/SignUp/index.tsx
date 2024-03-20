@@ -49,7 +49,7 @@ export const SignUp: React.FC = () => {
           },
         });
         dispatch(createAuth(userInfo));
-        navigate('/');
+        navigate('/editor');
       }
     } catch (error) {
       toast.error(t('error-sing-up'), {
@@ -63,7 +63,7 @@ export const SignUp: React.FC = () => {
 
   useEffect(() => {
     if (isUser) {
-      navigate('/', { replace: true });
+      navigate('/editor', { replace: true });
     }
   }, []);
 

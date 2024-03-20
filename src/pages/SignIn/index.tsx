@@ -47,7 +47,7 @@ export const SignIn: React.FC = () => {
           },
         });
         dispatch(createAuth(userInfo));
-        navigate('/');
+        navigate('/editor');
       }
     } catch (error) {
       toast.error(t('error-sing-in'), {
@@ -61,7 +61,7 @@ export const SignIn: React.FC = () => {
 
   useEffect(() => {
     if (isUser) {
-      navigate('/', { replace: true });
+      navigate('/editor', { replace: true });
     }
   }, []);
 

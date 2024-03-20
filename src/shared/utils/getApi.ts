@@ -1,3 +1,7 @@
+const defaultHeader = {
+  'Content-Type': 'application/json',
+};
+
 export const getAPI = async (
   url: string,
   query: string,
@@ -6,7 +10,7 @@ export const getAPI = async (
 ) => {
   const result = await fetch(url, {
     method: 'POST',
-    headers: headers || { 'Content-Type': 'application/json' },
+    headers: headers ? { ...defaultHeader, ...headers } : defaultHeader,
     body: JSON.stringify({
       query,
       variables,
