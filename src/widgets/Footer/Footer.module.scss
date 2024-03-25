@@ -1,0 +1,29 @@
+.footer {
+  @apply px-2 py-4 flex flex-col justify-between items-center;
+  margin-top: auto;
+
+  p {
+    color: var(--color-primary);
+  }
+
+  @media (min-width: 768px) {
+    @apply flex-row;
+  }
+}
+
+.gitIcons {
+  @apply flex;
+
+  a {
+    @apply mx-2;
+  }
+}
+
+.rsLogo {
+  @apply my-2;
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}

@@ -1,0 +1,13 @@
+.desktop {
+  @apply hidden lg:flex space-x-4 items-center gap-7;
+}
+
+.mobile {
+  @apply lg:hidden flex p-2 flex-col w-full;
+
+  .email {
+    color: white;
+    text-align: center;
+    padding: 5px 0;
+  }
+}

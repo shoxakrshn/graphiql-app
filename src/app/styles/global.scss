@@ -1,0 +1,22 @@
+@use 'abstracts' as *;
+@use 'base' as *;
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply px-4;
+}
+
+body,
+#root {
+  @apply flex flex-col;
+  min-height: 100vh;
+  height: 100vh;
+}
+
+main {
+  @apply mt-16;
+  flex-grow: 1;
+}

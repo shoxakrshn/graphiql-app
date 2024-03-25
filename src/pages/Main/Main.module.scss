@@ -1,0 +1,75 @@
+.wrapper {
+  @apply flex justify-center flex-wrap items-center;
+}
+
+.title {
+  @include font-style($font-sans, $font-size-5xl, var(--color-accent), 600);
+}
+
+.header {
+  @include font-style($font-sans, $font-size-4xl, var(--color-accent), 600);
+}
+
+.subheader {
+  @include font-style($font-sans, $font-size-2xl, var(--color-primary), 600);
+}
+
+.info {
+  @apply my-3;
+}
+
+.container {
+  @apply flex justify-around flex-wrap items-center;
+  width: 100%;
+}
+
+.content {
+  @apply flex  justify-center flex-col;
+  width: 35%;
+}
+
+.image {
+  width: 40%;
+}
+
+.content,
+.image {
+  @apply mx-3;
+}
+
+.icon {
+  width: 450px;
+}
+
+.team {
+  @apply my-1;
+}
+
+.teamMember {
+  @apply my-4 flex items-center;
+}
+
+.avatar {
+  @apply mx-2;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
+.name {
+  color: var(--color-primary);
+}
+
+.role {
+  color: var(--color-accent);
+}
+
+@media screen and (max-width: 768px) {
+  .content {
+    width: 70%;
+  }
+
+  .image {
+    display: none;
+  }
+}
