@@ -22,7 +22,7 @@
     "@uiw/codemirror-theme-material": "^4.21.21",
     "@uiw/react-codemirror": "^4.21.21",
     "classnames": "^2.3.2",
-    "firebase": "^10.7.1",
+    "firebase": "^10.6.0",
     "graphql": "^16.8.1",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
