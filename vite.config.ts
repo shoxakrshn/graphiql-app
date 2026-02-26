@@ -1,6 +1,7 @@
 /// <reference types="vitest" />
 /// <reference types="vite/client" />
 
+import path from 'path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
@@ -23,7 +24,8 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@use "./src/app/styles/abstracts/_index.scss" as *;`,
+        additionalData: `@use "abstracts/index" as *;`,
+        loadPaths: [path.resolve(process.cwd(), 'src/app/styles')],
       },
     },
   },
