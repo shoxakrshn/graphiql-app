@@ -160,6 +160,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, url }) => {
       </div>
       <div className={styles.modalContent}>
         <Suspense fallback={<SuspenseFallback />}>
+          {/* eslint-disable-next-line react-hooks/static-components */}
           <ModalContent
             schemaTypes={schemaTypes}
             selectedType={selectedType}

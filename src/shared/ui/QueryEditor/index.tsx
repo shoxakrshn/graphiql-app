@@ -1,7 +1,7 @@
 import CodeMirror from '@uiw/react-codemirror';
 import { materialLightInit } from '@uiw/codemirror-theme-material';
 import { langs } from '@uiw/codemirror-extensions-langs';
-import { Dispatch, useCallback } from 'react';
+import { Dispatch } from 'react';
 
 type PropsType = {
   setQuery?: Dispatch<React.SetStateAction<string>>;
@@ -10,11 +10,11 @@ type PropsType = {
 };
 
 export const QueryEditor: React.FC<PropsType> = ({ setQuery, response = '', readonly = false }) => {
-  const onChange = useCallback((val: string) => {
+  const onChange = (val: string) => {
     if (setQuery) {
       setQuery(val);
     }
-  }, []);
+  };
 
   const options = {
     settings: {

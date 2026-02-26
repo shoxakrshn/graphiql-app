@@ -1,7 +1,7 @@
 import CodeMirror from '@uiw/react-codemirror';
 import { materialLightInit } from '@uiw/codemirror-theme-material';
 import { langs } from '@uiw/codemirror-extensions-langs';
-import { Dispatch, useCallback } from 'react';
+import { Dispatch } from 'react';
 
 const options = {
   settings: {
@@ -18,9 +18,9 @@ type PropsType = {
 };
 
 export const VariableEditor = ({ setVariables, value }: PropsType) => {
-  const onChange = useCallback((val: string) => {
+  const onChange = (val: string) => {
     setVariables(val);
-  }, []);
+  };
 
   return (
     <CodeMirror
