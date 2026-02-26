@@ -15,7 +15,7 @@ type UseLanguageType = {
 };
 
 type GlobalWithLocalizationProvider = typeof globalThis & {
-  LocalizationProvider: (props: { children: ReactNode }) => JSX.Element;
+  LocalizationProvider: (props: { children: ReactNode }) => React.JSX.Element;
   useLanguage: () => UseLanguageType;
 };
 

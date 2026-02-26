@@ -32,7 +32,7 @@ export const NavMenu: React.FC<PropsType> = ({ userStatus, layout, email }) => {
         },
       });
       dispatch(cleanAuth());
-    } catch (error) {
+    } catch {
       toast.error(t('error-sing-out'), {
         closeButton: false,
         onClick: () => {

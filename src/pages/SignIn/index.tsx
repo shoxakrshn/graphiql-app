@@ -49,7 +49,7 @@ export const SignIn: React.FC = () => {
         dispatch(createAuth(userInfo));
         navigate('/editor');
       }
-    } catch (error) {
+    } catch {
       toast.error(t('error-sing-in'), {
         closeButton: false,
         onClick: () => {

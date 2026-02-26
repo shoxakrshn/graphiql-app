@@ -54,7 +54,12 @@ const Editor = () => {
   }, []);
 
   const onChevronHandler = useCallback(() => {
-    isCollapsed ? panelRef.current?.expand() : panelRef.current?.collapse();
+    if (isCollapsed) {
+      panelRef.current?.expand();
+    } else {
+      panelRef.current?.collapse();
+    }
+
     setIsCollapsed(!isCollapsed);
   }, [isCollapsed]);
 
@@ -63,7 +68,9 @@ const Editor = () => {
       setTab(activeTab);
       setIsCollapsed(false);
 
-      panelRef.current?.isCollapsed && panelRef.current.expand();
+      if (panelRef.current?.isCollapsed) {
+        panelRef.current?.expand();
+      }
     },
     [tab],
   );
@@ -78,7 +85,7 @@ const Editor = () => {
       );
 
       setResponse(convertToPrettier(JSON.stringify(request)));
-    } catch (error) {
+    } catch {
       setResponse('');
       toast.error(t('error-API-request'), {
         closeButton: false,
