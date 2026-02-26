@@ -1,0 +1,78 @@
+.container {
+  @apply flex gap-4;
+  height: 100%;
+
+  @include maxWidthCustom(768px) {
+    @apply flex-col;
+  }
+}
+
+.rightColumn,
+.leftColumn {
+  @apply w-6/12 h-full;
+
+  @include maxWidthCustom(768px) {
+    @apply w-full;
+  }
+}
+
+.leftColumn {
+  @apply flex flex-col gap-2;
+}
+
+.rightColumn {
+  @include maxWidthCustom(768px) {
+    @apply h-[60%];
+  }
+}
+
+.editorsContainer {
+  @apply rounded-lg shadow-md overflow-hidden;
+  @apply h-full;
+}
+
+.tab {
+  @apply inline-block cursor-pointer rounded-md px-3 py-1;
+
+  &:hover {
+    color: var(--color-primary);
+    transition: color ease-in-out 0.4s;
+  }
+}
+
+.tabActive {
+  background-color: var(--color-primary);
+  color: var(--color-basic);
+
+  &:hover {
+    color: var(--color-basic);
+    transition: none;
+  }
+}
+
+.buttonsContainer {
+  @apply w-10 space-y-2 absolute right-2.5 top-2.5;
+}
+
+.pageResize {
+  @apply flex items-center justify-between border-t-2 p-2 gap-2;
+}
+
+.urlLabel {
+  @apply w-full;
+
+  @include maxWidthCustom(768px) {
+    @apply w-full;
+  }
+}
+
+.urlInput {
+  @apply w-full border rounded grow p-2;
+}
+
+.sideButtons {
+  @apply h-10 w-10 rounded-xl bg-fuchsia-500 p-2;
+  @apply hover:bg-fuchsia-600;
+
+  @extend %transition;
+}

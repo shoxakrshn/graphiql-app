@@ -1,0 +1,14 @@
+.header {
+  @apply px-2 py-1 fixed top-0 w-full;
+  z-index: 3;
+  background-color: white;
+  transition: background-color 0.3s ease;
+
+  &.scrolled {
+    background-color: var(--color-basic);
+  }
+}
+
+.container {
+  @apply mx-auto flex justify-between items-center;
+}
