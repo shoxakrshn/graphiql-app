@@ -51,7 +51,7 @@ export const Header = () => {
       });
       dispatch(cleanAuth());
       navigate('/');
-    } catch (error) {
+    } catch {
       toast.error(t('error-sing-out'), {
         closeButton: false,
         onClick: () => {

@@ -51,7 +51,7 @@ export const SignUp: React.FC = () => {
         dispatch(createAuth(userInfo));
         navigate('/editor');
       }
-    } catch (error) {
+    } catch {
       toast.error(t('error-sing-up'), {
         closeButton: false,
         onClick: () => {

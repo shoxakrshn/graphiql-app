@@ -4,7 +4,7 @@ export function convertToPrettier(file: string): string {
     if (typeof parsedResponse === 'object') {
       return JSON.stringify(parsedResponse, null, 2);
     }
-  } catch (jsonError) {
+  } catch {
     return workWithQuery(file);
   }
 
